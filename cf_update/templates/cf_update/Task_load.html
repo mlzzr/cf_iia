@@ -1,0 +1,135 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+
+{% block title %}
+    Meet Your Boxes!
+{% endblock %}
+
+{% block content %}
+
+<!--
+Documentation on how to write a django template here:
+https://docs.djangoproject.com/en/1.8/ref/templates/language/
+
+Bootstrap comes pre-loaded, so you can use any Bootstrap elements:
+http://getbootstrap.com/components/
+
+-->
+    <img src="{% static urn_image %}"/>
+
+    <!--<table class="table">-->
+        <!--<tr>-->
+            <!--<th>Box</th>-->
+            <!--<th>Probability</th>-->
+            <!--{% if player.blue == 1 %}-->
+            <!--<th>Blue</th>-->
+            <!--{% endif %}-->
+            <!--{% if player.orange == 1 %}-->
+            <!--<th>Orange</th>-->
+            <!--{% endif %}-->
+            <!--{% if player.yellow == 1 %}-->
+            <!--<th>Yellow</th>-->
+            <!--{% endif %}-->
+            <!--{% if player.green == 1 %}-->
+            <!--<th>Green</th>-->
+            <!--{% endif %}-->
+            <!--{% if player.red == 1 %}-->
+            <!--<th>Red</th>-->
+            <!--{% endif %}-->
+            <!--{% if player.pink == 1 %}-->
+            <!--<th>Pink</th>-->
+            <!--{% endif %}-->
+            <!--<th>Total</th>-->
+        <!--</tr>-->
+        <!--<tr>-->
+            <!--<td>Box A</td>-->
+            <!--<td>{{player.prob1}}</td>-->
+            <!--{% if player.blue == 1 %}-->
+            <!--<td>{{player.blue1}}</td>-->
+            <!--{% endif %}-->
+            <!--{% if player.orange == 1 %}-->
+            <!--<td>{{player.orange1}}</td>-->
+            <!--{% endif %}-->
+            <!--{% if player.yellow == 1 %}-->
+            <!--<td>{{player.yellow1}}</td>-->
+            <!--{% endif %}-->
+            <!--{% if player.green == 1 %}-->
+            <!--<td>{{player.green1}}</td>-->
+            <!--{% endif %}-->
+            <!--{% if player.red == 1 %}-->
+            <!--<td>{{player.red1}}</td>-->
+            <!--{% endif %}-->
+            <!--{% if player.pink == 1 %}-->
+            <!--<td>{{player.pink1}}</td>-->
+            <!--{% endif %}-->
+            <!--<td>{{player.size1}}</td>-->
+        <!--</tr>-->
+        <!--<tr>-->
+            <!--<td>Box B</td>-->
+            <!--<td>{{player.prob2}}</td>-->
+            <!--{% if player.blue == 1 %}-->
+            <!--<td>{{player.blue2}}</td>-->
+            <!--{% endif %}-->
+            <!--{% if player.orange == 1 %}-->
+            <!--<td>{{player.orange2}}</td>-->
+            <!--{% endif %}-->
+            <!--{% if player.yellow == 1 %}-->
+            <!--<td>{{player.yellow2}}</td>-->
+            <!--{% endif %}-->
+            <!--{% if player.green == 1 %}-->
+            <!--<td>{{player.green2}}</td>-->
+            <!--{% endif %}-->
+            <!--{% if player.red == 1 %}-->
+            <!--<td>{{player.red2}}</td>-->
+            <!--{% endif %}-->
+            <!--{% if player.pink == 1 %}-->
+            <!--<td>{{player.pink2}}</td>-->
+            <!--{% endif %}-->
+            <!--<td>{{player.size2}}</td>-->
+        <!--</tr>-->
+    <!--</table>-->
+
+<p> <b>One of the two boxes in the picture above has been selected by the computer.</b></p>
+    <div  id="hide" style="display:block">
+        The computer is drawing a ball ...
+    </div>
+
+    <div id="yes" style="display:none">
+        <p>
+            <b>The ball drawn from the selected box is <span style="color:{{player.ball}}">{{ player.ball }}</span>.</b>
+        </p>
+
+        <img src="{% static ball_image %}"/>
+    </div>
+    <br>
+    <div id="guess" style="visibility:hidden">
+        <p><b>{{Constants.update_question}}</b></p>
+        <div class="input-group">
+            {{ form.guess1}}<span class="input-group-addon">%</span>
+        </div>
+        {% next_button %}
+    </div>
+
+
+
+    <!--<input type="hidden" name="info_acquired" value="False" id="id_info_acquired"/>-->
+{% endblock %}
+
+{% block styles %}
+    <style media="screen">
+      .input-group {
+        max-width: 100px;
+      }
+    </style>
+{% endblock %}
+
+{% block scripts %}
+
+    <!-- Loading for drawing a ball -->
+    <script>
+        setTimeout(function(){
+            document.getElementById('hide').style.display = "none";
+            document.getElementById('yes').style.display = "block";
+            document.getElementById('guess').style.visibility = "visible";},3000);
+    </script>
+{% endblock %}

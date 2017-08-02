@@ -1,0 +1,35 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+
+
+{% block title %}
+Details on the Payment Calculation
+{% endblock %}
+
+{% block content %}
+
+<p>
+	The payment rule is as follows:
+</p>
+<ul>
+<li> Suppose the computer has chosen a question to count for payment and in answering this question, you say it is X% likely that the event stated in the question is correct. </li>
+<li> Then the computer randomly generates a number Y between 0 and 100. The value of Y is not related to any of your answers.  </li>
+<li> We then compare X and Y. </li>
+	<ul>
+		<li>If X is larger than Y, then you receive the extra bonus of {{Constants.high_bonus}} if the selected box was indeed Box A and no extra bonus if it was Box B.</li>
+		<li>If Y is larger than X, then you receive the extra bonus of {{Constants.high_bonus}} with Y% chance and no bonus with (100-Y)% chance. This is done by letting the computer generate a second random number Z between 0 and 100, and you get paid the extra bonus if and only if Z is smaller than Y.</li>
+	</ul>
+</ul>
+    
+ <p>
+       The computer chose {% if bonus_part == 2 %}Question {{bonus_guess}} in {% else %}{% endif %}Round {{bonus_round}}, Part {{bonus_part}} to count for payment. Your answer to that question was {{ selected_guess }}%. The lottery chosen by the computer wins with probability {{ lottery_odds }}%. {% if selected_guess < lottery_odds %}Since your answer is lower than the odds of the lottery, the computer determines your extra bonus according to the outcome of the lottery. {% else %} Since your answer is higher than the odds of the lottery, whether you win the extra bonus depends on whether the event stated in the question indeed happened. {% endif %}
+ </p>
+<p>
+        {% if bonus > 0 %} Congratulations! You win the extra bonus! Your total earning will be the HIT payment {{ Constants.base_pay }} plus the completion bonus {{ Constants.complete_bonus }} and an extra bonus of {{ bonus }} for a total of {{Constants.total_max}}. Congratulations!
+        {% else %} Unfortunately, you were unlucky and didn't win the extra bonus. Your total earning will be the HIT payment {{ Constants.base_pay }} plus the completion bonus {{ Constants.complete_bonus }} for a total of {{Constants.total_min}}.
+        {% endif %}
+</p>
+
+
+{% endblock %}
+

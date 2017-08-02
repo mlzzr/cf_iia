@@ -1,0 +1,41 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+
+{% block title %}
+    Instruction Comprehension Questions
+{% endblock %}
+
+{% block content %}
+
+    <p>
+        Please answer the following questions carefully. You cannot proceed (and hence will not be paid any bonus) unless you answer all true/false questions correctly. <b> You will be excluded from this study if you answer these questions incorrectly too often. </b>
+    </p>
+
+    {% for field in form %}
+        {% formfield field %}
+    {% endfor %}
+
+    {% next_button %}
+
+
+<div class="panel-group" id="accordion">
+    <div class="panel panel-warning" id="panel1">
+        <div class="panel-heading">
+             <h4 class="panel-title">
+        <a data-toggle="collapse" data-target="#collapseOne" class="btn-block" href="#collapseOne">
+            Instructions -- Click to collapse
+        </a>
+      </h4>
+
+        </div>
+        <div id="collapseOne" class="panel-collapse collapse in" data-toggle="false">
+            <div class="panel-body">
+ 
+<small> {% include  "cf_predict/ShortIns.html"%} </small>
+        </div>
+    </div>
+</div>
+</div>
+
+
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+
+
+{% block title %}
+Sorry -- you did not pass the understanding tests
+{% endblock %}
+
+{% block content %}
+
+
+<p>
+<b>Unfortunately, you did not pass the understanding test. Hence, you are unfortunately ineligible to participate further in this study. </b>
+We will pay your HIT fee as soon as possible and hope you do not feel unfairly treated by our procedure. Please click on the "next" button below to complete this study and make yourself eligible for your HIT fee payment.
+</p>
+
+{% next_button %}
+
+{% endblock %}
+ 

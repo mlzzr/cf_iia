@@ -1,0 +1,34 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+
+{% block title %}
+    Results
+{% endblock %}
+
+{% block content %}
+    <p>
+        Thank you so much for completing this survey! We really appreciate your contribution to our study!
+    </p>
+
+    <h3>Payment:</h3>
+    <p>
+       The computer chose {% if bonus_part == 2 %}Question {{bonus_guess}} in {% else %}{% endif %}Round {{bonus_round}}, Part {{bonus_part}} to count for payment. Your answer to that question was {{ selected_guess }}%.
+    </p>
+
+    <p>
+        {% if bonus > 0 %} Congratulations! You win the extra bonus! Your total earning will be the HIT payment {{ Constants.base_pay }} plus the completion bonus {{ Constants.complete_bonus }} and an extra bonus of {{ bonus }} for a total of {{Constants.total_max}}. Congratulations!
+        {% else %} Unfortunately, you were unlucky and didn't win the extra bonus. Your total earning will be the HIT payment {{ Constants.base_pay }} plus the completion bonus {{ Constants.complete_bonus }} for a total of {{Constants.total_min}}.
+        {% endif %}
+    </p>
+
+    <p>
+        We will make all payments as soon as possible.
+    </p>
+
+	<p>If you have any further questions or suggestions, please do not hesitate to contact <a href="mailto:ycliang@stanford.edu?Subject=MTurk%20Study" target="_top">me</a>. Please do contact me with any negative or positive feedback and in particular with any difficulties or bugs you encountered. And do not forget to rate me on Turkopticon!
+    </p>
+
+    {% next_button %}
+{% endblock %}
+
+

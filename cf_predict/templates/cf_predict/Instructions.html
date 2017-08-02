@@ -1,0 +1,51 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+
+{% block title %}
+Instructions -- Please Read Carefully
+{% endblock %}
+
+{% block content %}
+
+<div class="box1">
+	<p> <b>You will be asked to answer questions about these instructions and you will not be able to proceed unless you answer all questions correctly! </b> </p>
+
+	  <p> <b> If you do not fully understand the instructions, we cannot use your data in our study. Please <a href="mailto:ycliang@stanford.edu?Subject=MTurk%20Study" target="_top">email me</a> if you feel you understood everything but the tests do not let you pass. </b> </p>
+</div>
+
+
+<p>Part 2 takes about {{Constants.minutes2}} minutes and consists of a number of rounds. As was in Part 1, in each round there are two boxes filled with the same number of colorful balls. The computer will select either Box A or Box B, each with 50% chance. Then, from the selected box, the computer will randomly draw a ball. Each ball in the selected box is equally likely to be drawn.</p>
+
+<p>In Part 2, we will not tell you which box is selected. Nor will we show you the ball that is drawn. Instead, you will be asked questions in the following form: </p>
+	<img src="{% static predict_question %}" width="700" class="box2"/>
+
+<p>Notice that in this question, you are asked to assess the odds that both "the computer selects Box A" and "the computer draws a blue ball from Box A" are true statements. </p>
+	<!--<p>You may find it helpful to think in this way. Imagine that the computer repeats what it does many times, say 100. That is, given two boxes, the computer tosses a coin, selects a box, draws a ball from it (and puts it back), and with the two boxes staying the same, it tosses a coin again, selects a box again, draws a ball again... <b>Among all 100 times of repetition</b>, what do you think is the proportion of times when the computer selects Box A AND draws a <span style="color:blue"><b>blue</b></span> ball from it? This proportion should be your answer to the original question. </p>-->
+
+<p> In Part 2, we use the same type of payment rule as in Part 1. Therefore, as before, <b>you are most likely to get the extra bonus of {{Constants.high_bonus}} when you give us your best guess for each question</b>. Think carefully and then type in the number that truly reflects your assessment. You should not rush the questions or randomly answer something, as this will increase the chance of you not getting the extra bonus! If you would like to know the details of the payment rule, read the next screen. We will <b>not</b> quiz you on the information on the next screen.</p>
+
+
+<p>
+	We urge you to be <b>truthful</b> and <b> thoughtful </b> in answering the questions because <b>our research's quality depends on it!</b>
+</p>
+
+
+     {% next_button %}
+
+{% endblock %}
+
+
+{% block styles %}
+ <style type="text/css">
+ div.box1 {
+    padding: 10px;
+    border: 3px solid red;
+    margin: 0;
+}
+	 	 img.box2 {
+    padding: 10px;
+    border: 1px solid #eee;
+    margin: 0;
+	 }
+ </style>
+{% endblock %}
