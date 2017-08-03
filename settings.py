@@ -163,7 +163,7 @@ SESSION_CONFIGS = [
                 qualification.LocaleRequirement("EqualTo", "US"),
                 qualification.PercentAssignmentsApprovedRequirement("GreaterThanOrEqualTo", 95),
                 qualification.NumberHitsApprovedRequirement("GreaterThanOrEqualTo", 1000),
-                qualification.Requirement('3SFGOZQ0QP9FTMWL37V9SYPG2VPC6V', 'DoesNotExist')
+                # qualification.Requirement('3SFGOZQ0QP9FTMWL37V9SYPG2VPC6V', 'DoesNotExist')
             ]
         },
     },
