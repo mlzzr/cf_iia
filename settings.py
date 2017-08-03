@@ -110,22 +110,21 @@ ROOMS = [
 # and also in docs for boto:
 # https://boto.readthedocs.org/en/latest/ref/mturk.html?highlight=mturk#module-boto.mturk.qualification
 
-mturk_hit_settings = {
-    'keywords': ['easy', 'bonus', 'choice', 'study', 'economics'],
-    'title': 'Title for your experiment',
-    'description': 'Description for your experiment',
-    'frame_height': 500,
-    'preview_template': 'cf_update/templates/cf_update/Welcome.html',
-    'minutes_allotted_per_assignment': 120,
-    'expiration_hours': 7*24, # 7 days
-    #'grant_qualification_id': 'YOUR_QUALIFICATION_ID_HERE',# to prevent retakes
-    'qualification_requirements': [
-        qualification.LocaleRequirement("EqualTo", "US"),
-        qualification.PercentAssignmentsApprovedRequirement("GreaterThanOrEqualTo", 95),
-        qualification.NumberHitsApprovedRequirement("GreaterThanOrEqualTo", 1000),
-        # qualification.Requirement('YOUR_QUALIFICATION_ID_HERE', 'DoesNotExist')
-    ]
-}
+# mturk_hit_settings = {
+#     'keywords': ['easy', 'bonus', 'choice', 'study', 'economics'],
+#     'title': 'Title for your experiment',
+#     'description': 'Description for your experiment',
+#     'frame_height': 500,
+#     'minutes_allotted_per_assignment': 120,
+#     'expiration_hours': 7*24, # 7 days
+#     'grant_qualification_id': 'YOUR_QUALIFICATION_ID_HERE',# to prevent retakes
+#     'qualification_requirements': [
+#         qualification.LocaleRequirement("EqualTo", "US"),
+#         qualification.PercentAssignmentsApprovedRequirement("GreaterThanOrEqualTo", 95),
+#         qualification.NumberHitsApprovedRequirement("GreaterThanOrEqualTo", 1000),
+#         qualification.Requirement('YOUR_QUALIFICATION_ID_HERE', 'DoesNotExist')
+#     ]
+# }
 
 
 # if you set a property in SESSION_CONFIG_DEFAULTS, it will be inherited by all configs
@@ -155,7 +154,7 @@ SESSION_CONFIGS = [
             'title': '40 Minutes STANFORD UNIVERSITY Economics Study - Earn BONUS of $1.5~$6',
             'description': 'We are conducting an academic survey on individual decision making. You will be asked a number of questions on how likely some events happen.',
             'frame_height': 500,
-            'preview_template': 'global/MTurkPreview.html',
+            'preview_template': 'cf_update/templates/cf_update/Welcome.html',
             'minutes_allotted_per_assignment': 120,
             'expiration_hours': 7*24, # 7 days
             # 'grant_qualification_id': '3SFGOZQ0QP9FTMWL37V9SYPG2VPC6V',# to prevent retakes
