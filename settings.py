@@ -153,7 +153,7 @@ SESSION_CONFIGS = [
             'title': '40 Minutes STANFORD UNIVERSITY Economics Study - Earn BONUS of $1.5~$6',
             'description': 'We are conducting an academic survey on individual decision making. You will be asked a number of questions on how likely some events happen.',
             'frame_height': 500,
-            'preview_template': 'cf_update/templates/cf_update/Welcome.html',
+            'preview_template': 'global/MTurkPreview.html',
             'minutes_allotted_per_assignment': 120,
             'expiration_hours': 7*24, # 7 days
             # 'grant_qualification_id': '3SFGOZQ0QP9FTMWL37V9SYPG2VPC6V',# to prevent retakes
