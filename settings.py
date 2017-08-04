@@ -48,10 +48,10 @@ DATABASES = {
 # for flexibility, you can set it in the environment variable OTREE_AUTH_LEVEL
 AUTH_LEVEL = environ.get('OTREE_AUTH_LEVEL')
 
-ADMIN_USERNAME = 'admin'
+ADMIN_USERNAME = 'mlzzr'
 # for security, best to set admin password in an environment variable
-ADMIN_PASSWORD = environ.get('OTREE_ADMIN_PASSWORD')
-
+# ADMIN_PASSWORD = environ.get('OTREE_ADMIN_PASSWORD')
+ADMIN_PASSWORD = 'ycliangcf'
 
 # setting for integration with AWS Mturk
 AWS_ACCESS_KEY_ID = environ.get('AWS_ACCESS_KEY_ID')
@@ -156,12 +156,12 @@ SESSION_CONFIGS = [
             'preview_template': 'global/MTurkPreview.html',
             'minutes_allotted_per_assignment': 120,
             'expiration_hours': 7*24, # 7 days
-            # 'grant_qualification_id': '3SFGOZQ0QP9FTMWL37V9SYPG2VPC6V',# to prevent retakes
+            'grant_qualification_id': '3SFGOZQ0QP9FTMWL37V9SYPG2VPC6V',# to prevent retakes
             'qualification_requirements': [
                 qualification.LocaleRequirement("EqualTo", "US"),
                 qualification.PercentAssignmentsApprovedRequirement("GreaterThanOrEqualTo", 97),
-                # qualification.NumberHitsApprovedRequirement("GreaterThanOrEqualTo", 2000),
-                # qualification.Requirement('3SFGOZQ0QP9FTMWL37V9SYPG2VPC6V', 'DoesNotExist')
+                qualification.NumberHitsApprovedRequirement("GreaterThanOrEqualTo", 2000),
+                qualification.Requirement('3SFGOZQ0QP9FTMWL37V9SYPG2VPC6V', 'DoesNotExist')
             ]
         },
     },
