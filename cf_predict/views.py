@@ -65,7 +65,7 @@ class Task(Page):
 
     def vars_for_template(self):
         return {
-            'urn_image': 'rect_messy_12/urn{}.pdf'.format(self.player.question_id),
+            'urn_image': 'rect_messy_12/urn{}.png'.format(self.player.question_id),
         }
 
 

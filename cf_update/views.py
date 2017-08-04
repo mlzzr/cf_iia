@@ -80,8 +80,8 @@ class Task(Page):
 
 	def vars_for_template(self):
 		return {
-			'urn_image': 'rect_messy_12/urn{}.pdf'.format(self.player.question_id),
-			'ball_image': 'balls/ball_{}.pdf'.format(self.player.ball)
+			'urn_image': 'rect_messy_12/urn{}.png'.format(self.player.question_id),
+			'ball_image': 'balls/ball_{}.png'.format(self.player.ball)
 		}
 
 	def before_next_page(self):

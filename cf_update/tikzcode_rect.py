@@ -15,15 +15,38 @@ for item in questions:
                 item[key] = float(item[key])
         except ValueError:
             pass
-
+## Header
 print("\\documentclass{article}")
 print("\\title{cf_update rect messy urns 12}")
 print("\\usepackage{tikz}")
 print("\\usepackage[margin=0.5in]{geometry}")
 print("\\usetikzlibrary{external}")
-print("\\tikzexternalize[prefix=cf_update/]")
+print("\\tikzexternalize[prefix=rect_messy_12/]")
 print("\\begin{document}")
 print('')
+## This is for png
+print('\\tikzset{')
+print('    png export/.style={')
+print(' external/system call=')
+print(' {xelatex \\tikzexternalcheckshellescape -halt-on-error -interaction=batchmode -jobname "\\image" "\\texsource";')
+print('  convert -density 300 white "\\image.pdf" "\\image.png"; rm -f "\\image.pdf"},')
+print('}')
+print('}')
+print('\\tikzset{')
+print('/pgf/images/external info,')
+print('use png/.style={png export,png import},')
+print('png import/.code={')
+print(' \\tikzset{')
+print('   /pgf/images/include external/.code={')
+print('\\includegraphics')
+print('                [width=15cm]')
+print('         {{##1}.png}')
+print('     }')
+print(' }')
+print('}')
+print('}')
+
+
 color_list = ['blue', 'green', 'black', 'red', 'yellow']
 for item in questions:
     box1 = []
@@ -33,6 +56,7 @@ for item in questions:
         box2 += [color] * item[color + '2']
     box1 = numpy.random.permutation(box1)
     box2 = numpy.random.permutation(box2)
+    print('\\tikzset{use png}')
     print("\\tikzsetnextfilename{"+"urn{}".format(item['id'])+"}")
     print('\\begin{tikzpicture}[scale=1.5]')
     print('\\begin{scope}[shift={(-3cm,0)}]')
