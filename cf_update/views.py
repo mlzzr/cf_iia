@@ -18,7 +18,7 @@ class Instructions(Page):
 
     def vars_for_template(self):
         return {
-            'urn_image': 'rect_messy_12/ins_urn_image.png',
+            'urn_image': 'rect_12/ins_urn_image.png',
             'ball_image': 'balls/ins_drawn_ball.png',
             'update_question': 'balls/ins_update_question.png',
         }
@@ -80,7 +80,7 @@ class Task(Page):
 
 	def vars_for_template(self):
 		return {
-			'urn_image': 'rect_messy_12/urn{}.png'.format(self.player.question_id),
+			'urn_image': 'rect_12/urn{}.png'.format(self.player.question_id),
 			'ball_image': 'balls/ball_{}.png'.format(self.player.ball)
 		}
 

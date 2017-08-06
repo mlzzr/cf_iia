@@ -156,12 +156,12 @@ SESSION_CONFIGS = [
             'preview_template': 'global/MTurkPreview.html',
             'minutes_allotted_per_assignment': 120,
             'expiration_hours': 7*24, # 7 days
-            'grant_qualification_id': '3SFGOZQ0QP9FTMWL37V9SYPG2VPC6V',# to prevent retakes
+            # 'grant_qualification_id': '3SFGOZQ0QP9FTMWL37V9SYPG2VPC6V',# to prevent retakes
             'qualification_requirements': [
                 qualification.LocaleRequirement("EqualTo", "US"),
                 qualification.PercentAssignmentsApprovedRequirement("GreaterThanOrEqualTo", 97),
-                qualification.NumberHitsApprovedRequirement("GreaterThanOrEqualTo", 2000),
-                qualification.Requirement('3SFGOZQ0QP9FTMWL37V9SYPG2VPC6V', 'DoesNotExist')
+                # qualification.NumberHitsApprovedRequirement("GreaterThanOrEqualTo", 2000),
+                # qualification.Requirement('3SFGOZQ0QP9FTMWL37V9SYPG2VPC6V', 'DoesNotExist')
             ]
         },
     },

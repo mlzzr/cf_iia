@@ -86,4 +86,4 @@ class Player(BasePlayer):
         self.bonus_round = self.participant.vars['bonus_round']
         # self.selected_guess = 1
         self.selected_guess = self.participant.vars['selected_guess']
-        self.participant.payoff = self.bonus
+        self.participant.payoff = self.bonus + Constants.complete_bonus
