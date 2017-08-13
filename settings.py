@@ -165,6 +165,29 @@ SESSION_CONFIGS = [
             ]
         },
     },
+    {
+        'name': 'cf_iia_strategy',
+        'display_name': "Belief Updating (strategy)",
+        'num_demo_participants': 9,
+        'app_sequence': ['cf_strategy', 'cf_predict', 'cf_survey'],
+        'participation_fee': 2.00,
+        'mturk_hit_settings': {
+            'keywords': ['easy', 'bonus', 'choice', 'study', 'economics'],
+            'title': '40 Minutes STANFORD UNIVERSITY Economics Study - Earn BONUS of $1.5~$6',
+            'description': 'We are conducting an academic survey on individual decision making. You will be asked a number of questions on how likely some events happen.',
+            'frame_height': 800,
+            'preview_template': 'global/MTurkPreview2.html',
+            'minutes_allotted_per_assignment': 120,
+            'expiration_hours': 7*24, # 7 days
+            # 'grant_qualification_id': '3SFGOZQ0QP9FTMWL37V9SYPG2VPC6V',# to prevent retakes
+            'qualification_requirements': [
+                qualification.LocaleRequirement("EqualTo", "US"),
+                qualification.PercentAssignmentsApprovedRequirement("GreaterThanOrEqualTo", 97),
+                # qualification.NumberHitsApprovedRequirement("GreaterThanOrEqualTo", 2000),
+                # qualification.Requirement('3SFGOZQ0QP9FTMWL37V9SYPG2VPC6V', 'DoesNotExist')
+            ]
+        },
+    },
 
 ]
 
