@@ -1,0 +1,152 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+
+{% block title %}
+    Meet Your Boxes!
+{% endblock %}
+
+{% block content %}
+
+<!--
+Documentation on how to write a django template here:
+https://docs.djangoproject.com/en/1.8/ref/templates/language/
+
+Bootstrap comes pre-loaded, so you can use any Bootstrap elements:
+http://getbootstrap.com/components/
+
+-->
+
+<p><b>The computer has selected one of the two boxes in the picture below and has drawn a ball out of it.</b> </p>
+    <img src="{% static urn_image %}" width="500"/>
+
+    <!--<table class="table">-->
+        <!--<tr>-->
+            <!--<th>Box</th>-->
+            <!--<th>Probability</th>-->
+            <!--{% if player.blue == 1 %}-->
+            <!--<th>Blue</th>-->
+            <!--{% endif %}-->
+            <!--{% if player.orange == 1 %}-->
+            <!--<th>Orange</th>-->
+            <!--{% endif %}-->
+            <!--{% if player.yellow == 1 %}-->
+            <!--<th>Yellow</th>-->
+            <!--{% endif %}-->
+            <!--{% if player.green == 1 %}-->
+            <!--<th>Green</th>-->
+            <!--{% endif %}-->
+            <!--{% if player.red == 1 %}-->
+            <!--<th>Red</th>-->
+            <!--{% endif %}-->
+            <!--{% if player.pink == 1 %}-->
+            <!--<th>Pink</th>-->
+            <!--{% endif %}-->
+            <!--<th>Total</th>-->
+        <!--</tr>-->
+        <!--<tr>-->
+            <!--<td>Box A</td>-->
+            <!--<td>{{player.prob1}}</td>-->
+            <!--{% if player.blue == 1 %}-->
+            <!--<td>{{player.blue1}}</td>-->
+            <!--{% endif %}-->
+            <!--{% if player.orange == 1 %}-->
+            <!--<td>{{player.orange1}}</td>-->
+            <!--{% endif %}-->
+            <!--{% if player.yellow == 1 %}-->
+            <!--<td>{{player.yellow1}}</td>-->
+            <!--{% endif %}-->
+            <!--{% if player.green == 1 %}-->
+            <!--<td>{{player.green1}}</td>-->
+            <!--{% endif %}-->
+            <!--{% if player.red == 1 %}-->
+            <!--<td>{{player.red1}}</td>-->
+            <!--{% endif %}-->
+            <!--{% if player.pink == 1 %}-->
+            <!--<td>{{player.pink1}}</td>-->
+            <!--{% endif %}-->
+            <!--<td>{{player.size1}}</td>-->
+        <!--</tr>-->
+        <!--<tr>-->
+            <!--<td>Box B</td>-->
+            <!--<td>{{player.prob2}}</td>-->
+            <!--{% if player.blue == 1 %}-->
+            <!--<td>{{player.blue2}}</td>-->
+            <!--{% endif %}-->
+            <!--{% if player.orange == 1 %}-->
+            <!--<td>{{player.orange2}}</td>-->
+            <!--{% endif %}-->
+            <!--{% if player.yellow == 1 %}-->
+            <!--<td>{{player.yellow2}}</td>-->
+            <!--{% endif %}-->
+            <!--{% if player.green == 1 %}-->
+            <!--<td>{{player.green2}}</td>-->
+            <!--{% endif %}-->
+            <!--{% if player.red == 1 %}-->
+            <!--<td>{{player.red2}}</td>-->
+            <!--{% endif %}-->
+            <!--{% if player.pink == 1 %}-->
+            <!--<td>{{player.pink2}}</td>-->
+            <!--{% endif %}-->
+            <!--<td>{{player.size2}}</td>-->
+        <!--</tr>-->
+    <!--</table>-->
+
+
+<p> Bob will inspect the drawn ball and answer the following question on your behalf: </p>
+<blockquote><p>    "Now that you know the color of the ball, how likely do you think that the selected box in this round was <b>Box A</b>?" </p></blockquote>
+
+<div>
+    <p><b>Please tell Bob how to answer this question.</b> (Please type integers between 0 and 100 into the forms.)</p>
+    <div>
+        <form  style="margin: 0; padding: 0;">
+            <blockquote>
+                {% if blue == 1 %}
+                <p>
+                    "If you see a <span style="color:blue"><b>blue</b></span> ball, answer
+                    <input style="display: inline; width: 50px;" name="guess_blue"> %."
+                </p>
+                {{ form.guess_blue.errors }}
+                {% endif %}
+                {% if green == 1 %}
+                <p>
+                    "If you see a <span style="color:green"><b>green</b></span> ball, answer
+                    <input style="display: inline; width: 50px;" name="guess_green"> %."
+                </p>
+                {{ form.guess_green.errors }}
+                {% endif %}
+                {% if black == 1 %}
+                <p>
+                    "If you see a <span style="color:black"><b>black</b></span> ball, answer
+                    <input style="display: inline; width: 50px;" name="guess_black"> %."
+                </p>
+                {{ form.guess_black.errors }}
+                {% endif %}
+                {% if red == 1 %}
+                <p>
+                    "If you see a <span style="color:red"><b>red</b></span> ball, answer
+                    <input style="display: inline; width: 50px;" name="guess_red"> %."
+                </p>
+                {{ form.guess_red.errors }}
+                {% endif %}
+                {% if yellow == 1 %}
+                <p>
+                    "If you see a <span style="color:yellow"><b>yellow</b></span> ball, answer
+                    <input style="display: inline; width: 50px;" name="guess_yellow"> %."
+                </p>
+                {{ form.guess_yellow.errors }}
+                {% endif %}
+
+            </blockquote>
+        </form>
+    </div>
+</div>
+
+{% next_button %}
+
+
+
+    <!--<input type="hidden" name="info_acquired" value="False" id="id_info_acquired"/>-->
+{% endblock %}
+
+
+
