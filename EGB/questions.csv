@@ -1,49 +1,12 @@
-id,blue1,orange1,green1,red1,yellow1,start1,size1,blue2,orange2,green2,red2,yellow2,start2,size2,prob1,prob2,blue,orange,green,red,yellow
-1,2,16,0,0,0,300,18,6,12,0,0,0,300,18,0.5,0.5,1,1,0,0,0
-2,4,2,4,4,4,40,18,3,6,3,3,3,240,18,0.5,0.5,1,1,1,1,1
-3,4,12,0,0,2,320,18,3,9,0,0,6,180,18,0.5,0.5,1,1,0,0,1
-4,2,16,0,0,0,180,18,6,5,7,0,0,0,18,0.5,0.5,1,1,1,0,0
-5,15,0,0,0,3,100,18,12,0,0,0,6,280,18,0.5,0.5,1,0,0,0,1
-6,0,3,5,5,5,100,18,0,6,4,4,4,260,18,0.5,0.5,0,1,1,1,1
-7,3,5,10,0,0,100,18,6,4,8,0,0,220,18,0.5,0.5,1,1,1,0,0
-8,3,15,0,0,0,80,18,6,3,9,0,0,80,18,0.5,0.5,1,1,1,0,0
-9,0,0,6,12,0,120,18,0,0,2,16,0,220,18,0.5,0.5,0,0,1,1,0
-10,3,6,3,3,3,140,18,4,2,4,4,4,280,18,0.5,0.5,1,1,1,1,1
-11,6,3,9,0,0,80,18,2,4,12,0,0,60,18,0.5,0.5,1,1,1,0,0
-12,6,5,7,0,0,40,18,2,16,0,0,0,100,18,0.5,0.5,1,1,1,0,0
-13,6,12,0,0,0,20,18,3,15,0,0,0,260,18,0.5,0.5,1,1,0,0,0
-14,6,4,4,4,0,80,18,3,5,5,5,0,200,18,0.5,0.5,1,1,1,1,0
-15,0,0,6,4,8,220,18,0,0,3,5,10,300,18,0.5,0.5,0,0,1,1,1
-16,9,0,0,6,3,180,18,0,0,0,3,15,0,18,0.5,0.5,1,0,0,1,1
-17,0,2,16,0,0,220,18,0,6,12,0,0,0,18,0.5,0.5,0,1,1,0,0
-18,4,4,4,4,2,160,18,3,3,3,3,6,140,18,0.5,0.5,1,1,1,1,1
-19,0,0,2,4,12,120,18,0,0,6,3,9,0,18,0.5,0.5,0,0,1,1,1
-20,0,0,0,2,16,280,18,7,0,0,6,5,120,18,0.5,0.5,1,0,0,1,1
-21,15,0,0,0,3,220,18,12,0,0,0,6,40,18,0.5,0.5,1,0,0,0,1
-22,5,5,5,0,3,160,18,4,4,4,0,6,120,18,0.5,0.5,1,1,1,0,1
-23,10,0,0,3,5,180,18,8,0,0,6,4,120,18,0.5,0.5,1,0,0,1,1
-24,3,15,0,0,0,60,18,6,3,9,0,0,260,18,0.5,0.5,1,1,1,0,0
-25,12,0,0,0,6,40,18,16,0,0,0,2,120,18,0.5,0.5,1,0,0,0,1
-26,3,3,3,3,6,0,18,4,4,4,4,2,60,18,0.5,0.5,1,1,1,1,1
-27,6,3,9,0,0,340,18,2,4,12,0,0,220,18,0.5,0.5,1,1,1,0,0
-28,6,5,7,0,0,220,18,2,16,0,0,0,240,18,0.5,0.5,1,1,1,0,0
-29,0,0,0,6,12,280,18,0,0,0,3,15,0,18,0.5,0.5,0,0,0,1,1
-30,0,6,4,4,4,0,18,0,3,5,5,5,300,18,0.5,0.5,0,1,1,1,1
-31,0,0,6,4,8,80,18,0,0,3,5,10,100,18,0.5,0.5,0,0,1,1,1
-32,6,3,9,0,0,60,18,3,15,0,0,0,200,18,0.5,0.5,1,1,1,0,0
-33,2,16,0,0,0,140,18,6,12,0,0,0,180,18,0.5,0.5,1,1,0,0,0
-34,2,4,4,4,4,180,18,6,3,3,3,3,320,18,0.5,0.5,1,1,1,1,1
-35,4,12,0,0,2,200,18,3,9,0,0,6,160,18,0.5,0.5,1,1,0,0,1
-36,0,0,2,16,0,300,18,0,0,6,5,7,0,18,0.5,0.5,0,0,1,1,1
-37,3,15,0,0,0,160,18,6,12,0,0,0,0,18,0.5,0.5,1,1,0,0,0
-38,3,5,5,5,0,240,18,6,4,4,4,0,120,18,0.5,0.5,1,1,1,1,0
-39,5,10,0,0,3,140,18,4,8,0,0,6,220,18,0.5,0.5,1,1,0,0,1
-40,0,0,0,3,15,100,18,9,0,0,6,3,220,18,0.5,0.5,1,0,0,1,1
-41,12,0,0,0,6,40,18,16,0,0,0,2,60,18,0.5,0.5,1,0,0,0,1
-42,3,3,6,3,3,60,18,4,4,2,4,4,180,18,0.5,0.5,1,1,1,1,1
-43,6,3,9,0,0,60,18,2,4,12,0,0,20,18,0.5,0.5,1,1,1,0,0
-44,7,0,0,6,5,340,18,0,0,0,2,16,260,18,0.5,0.5,1,0,0,1,1
-45,0,6,12,0,0,240,18,0,3,15,0,0,220,18,0.5,0.5,0,1,1,0,0
-46,4,4,4,0,6,260,18,5,5,5,0,3,260,18,0.5,0.5,1,1,1,0,1
-47,6,4,8,0,0,340,18,3,5,10,0,0,240,18,0.5,0.5,1,1,1,0,0
-48,3,9,0,0,6,100,18,15,0,0,0,3,220,18,0.5,0.5,1,1,0,0,1
+id,question,rate,withdraw,start,end
+1,Suppose the rate of return on a savings account is 10% per year. What is the minimum amount of dollars you have to put into this account now (the start of year 1) in order to withdraw $100 at the end of year 1? (Note: You are permitted to withdraw both interest and principal.),0.1,100,1,1
+2,Suppose the rate of return on a savings account is 5% per year. What is the minimum amount of dollars you have to put into this account now (the start of year 1) in order to withdraw $100 at the end of year 10? (Note: You are permitted to withdraw both interest and principal.),0.05,100,10,10
+3,"Suppose the rate of return on a savings account is 5% per year. What is the minimum amount of dollars you have to put into this account now (the start of year 1) in order to withdraw $10 at the end of every year starting from year 1, continuing forever? (Note: You are permitted to withdraw both interest and principal.)",0.05,10,1,1000
+4,Suppose the rate of return on a savings account is 10% per year. What is the minimum amount of dollars you have to put into this account now (the start of year 1) in order to withdraw $100 at the end of year 10? (Note: You are permitted to withdraw both interest and principal.),0.1,100,10,10
+5,"Suppose the rate of return on a savings account is 10% per year. What is the minimum amount of dollars you have to put into this account now (the start of year 1) in order to withdraw $10 at the end of every year starting from year 1, continuing forever? (Note: You are permitted to withdraw both interest and principal.)",0.1,10,1,1000
+6,"Suppose the rate of return on a savings account is 5% per year. What is the minimum amount of dollars you have to put into this account now (the start of year 1) in order to withdraw $10 at the end of every year starting from year 10, continuing forever? (Note: You are permitted to withdraw both interest and principal.)",0.05,10,10,1000
+7,"Suppose the rate of return on a savings account is 5% per year. What is the minimum amount of dollars you have to put into this account now (the start of year 1) in order to withdraw $10 at the end of every year starting from year 5, continuing forever? (Note: You are permitted to withdraw both interest and principal.)",0.05,10,5,1000
+8,Suppose the rate of return on a savings account is 10% per year. What is the minimum amount of dollars you have to put into this account now (the start of year 1) in order to withdraw $50 at the end of every year from year 1 through and including year 3? (Note: You are permitted to withdraw both interest and principal.),0.1,50,1,3
+9,Suppose the rate of return on a savings account is 10% per year. What is the minimum amount of dollars you have to put into this account now (the start of year 1) in order to withdraw $20 at the end of every year from year 1 through and including year 10? (Note: You are permitted to withdraw both interest and principal.),0.1,20,1,10
+10,Suppose the rate of return on a savings account is 10% per year. What is the minimum amount of dollars you have to put into this account now (the start of year 1) in order to withdraw $50 at the end of every year from year 6 through and including year 10? (Note: You are permitted to withdraw both interest and principal.),0.1,50,6,10
+11,Suppose the rate of return on a savings account is 10% per year. What is the minimum amount of dollars you have to put into this account now (the start of year 1) in order to withdraw $50 at the end of every year from year 6 through and including year 7? (Note: You are permitted to withdraw both interest and principal.),0.1,50,6,7

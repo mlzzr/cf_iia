@@ -18,24 +18,29 @@ class Instructions(Page):
 
     def vars_for_template(self):
         return {
-            'urn_image': 'rect_12/urn1.png',
-        }
+			'example_question': self.player.question_text,
+			'example_chart': 'EGB/chart{}.png'.format(self.player.question_id),
+			'threshold_0': Constants.threshold_0 * 100,
+			'threshold_1': Constants.threshold_1 * 100,
+		}
 
-class PaymentRule(Page):
-    def is_displayed(self):
-        return self.round_number == 1
 
 class Understanding(Page):
 	form_model = models.Player
+	form_fields = ['truefalse1', 'truefalse2', 'truefalse3']
 	def is_displayed(self):
 		return self.round_number == 1
-	def get_form_fields(self):
-		fields_to_show=[]
-		for key in range(1,Constants.numberunderstandingquestion1+1):
-			fields_to_show.append('truefalse{}'.format(key))
-		return fields_to_show
+	# def get_form_fields(self):
+	# 	fields_to_show=[]
+	# 	for key in range(1,Constants.numberunderstandingquestion1+1):
+	# 		fields_to_show.append('truefalse{}'.format(key))
+	# 	return fields_to_show
+	def vars_for_template(self):
+		return{
+			'question_chart': 'EGB/chart2.png',
+		}
 	def error_message(self, values):
-		if self.player.participant.vars.get('failure1') == 0:
+		if self.player.participant.vars.get('failure') == 0:
 			self.player.failures = 0
 
 		summand = 0
@@ -45,22 +50,12 @@ class Understanding(Page):
 			summand += 1
 		if values["truefalse3"] != True:
 			summand += 1
-		if values["truefalse4"] != False:
-			summand += 1
-		if values["truefalse5"] != True:
-			summand += 1
-		if values["truefalse6"] != False:
-			summand += 1
-		if values["truefalse7"] != True:
-			summand += 1
-		if values["truefalse8"] != False:
-			summand += 1
-		if summand > 1 and self.player.participant.vars.get('failure1') < Constants.failuretolerance1:
-			self.player.participant.vars['failure1'] = 1 + self.player.participant.vars.get('failure1')
+		if summand > 1 and self.player.participant.vars.get('failure') < Constants.failuretolerance:
+			self.player.participant.vars['failure'] = 1 + self.player.participant.vars.get('failure')
 			self.player.failures = self.player.failures + 1
 			return 'Sorry, you got ' + str(summand) + " questions wrong."
-		elif summand == 1 and self.player.participant.vars.get('failure1') < Constants.failuretolerance1:
-			self.player.participant.vars['failure1'] = 1 + self.player.participant.vars.get('failure1')
+		elif summand == 1 and self.player.participant.vars.get('failure') < Constants.failuretolerance:
+			self.player.participant.vars['failure'] = 1 + self.player.participant.vars.get('failure')
 			self.player.failures = self.player.failures  + 1
 			return 'Almost there! You just got one question wrong!'
 
@@ -68,70 +63,53 @@ class Understanding(Page):
 class sorrybutton2(Page):
 	form_model = models.Player
 	def is_displayed(self):
-		if self.player.participant.vars.get('failure1') >= Constants.failuretolerance1:
-			self.player.participant.vars['failure'] = Constants.failuretolerance + 5
 		return self.player.participant.vars.get('failure') >= Constants.failuretolerance and self.round_number == 1
 
 
 class Task(Page):
 	form_model = models.Player
-
-	def get_form_fields(self):
-		form_list = []
-		if self.player.blue == 1:
-			form_list.append('guess_blue')
-		if self.player.black == 1:
-			form_list.append('guess_black')
-		if self.player.yellow == 1:
-			form_list.append('guess_yellow')
-		if self.player.green == 1:
-			form_list.append('guess_green')
-		if self.player.red == 1:
-			form_list.append('guess_red')
-		return form_list
-
-	# def error_message(self, values):
-	# 	for form in form_fields:
-	# 		if values[form] > 100 or values[form] < 0 or not isinstance(values[form],int):
-	# 			return 'The numbers must be integers between 0 and 100.'
+	form_fields = ['answer']
 
 	def is_displayed(self):
-		return self.player.participant.vars.get('failure1') < Constants.failuretolerance1   # COMMENT THIS OUT WHEN RUNNING THE EXPERIMENT!!!
+		return self.player.participant.vars.get('failure') < Constants.failuretolerance
 
 	def vars_for_template(self):
 		return {
-			'urn_image': 'rect_12/urn{}.png'.format(self.player.question_id),
-			'blue': self.player.blue,
-			'black': self.player.black,
-			'yellow': self.player.yellow,
-			'green': self.player.green,
-			'red': self.player.red,
+			'round': self.round_number,
+			'question': self.player.question_text,
+			'chart': 'EGB/chart{}.png'.format(self.player.question_id),
 		}
 
 	def before_next_page(self):
 		self.player.calculate_bonus()
 
+class Survey(Page):
+    form_model = models.Player
+    form_fields = ['age', 'education', 'gender', 'major', 'howmuchmturk', 'income', 'howmuchstudies', 'calculator', 'software', 'commentsbox']
+
+    def is_displayed(self):
+        return self.player.participant.vars.get('failure') < Constants.failuretolerance and self.round_number == Constants.num_rounds
 
 
-# class Posterior(Page):
-#     form_model = models.Player
-#     form_fields = ['guess2']
-#
-#     def before_next_page(self):
-#         self.player.calculate_bonus()
-#
-#     def vars_for_template(self):
-#         return {
-#             'urn_image': 'cf_update/urn{}.pdf'.format(self.player.question_id),
-#             'ball_image': 'cf_update/ball_{}.pdf'.format(self.player.ball)
-#         }
+
+class Results(Page):
+    def is_displayed(self):
+        return self.player.participant.vars.get('failure') < Constants.failuretolerance and self.round_number == Constants.num_rounds
+
+    def vars_for_template(self):
+        return {
+            'bonus': self.player.participant.payoff,
+			'total_pay': self.player.participant.payoff_plus_participation_fee
+        }
+
 
 page_sequence = [
     Welcome,
     IRB,
     Instructions,
-    PaymentRule,
     Understanding,
     sorrybutton2,
     Task,
+	Survey,
+	Results,
 ]

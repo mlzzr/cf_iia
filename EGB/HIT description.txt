@@ -1,6 +1,0 @@
-'participation_fee': 2.00,
-'keywords': ['easy', 'bonus', 'choice', 'study', 'economics'],
-'title': '40 Minutes STANFORD UNIVERSITY Economics Study - Earn BONUS of $1.5~$6',
-'description': 'We are conducting an academic survey on individual decision making. You will be asked a number of questions on how likely some events happen.',
-'minutes_allotted_per_assignment': 120,
-'expiration_hours': 7*24, # 7 days

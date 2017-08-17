@@ -1,0 +1,75 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+
+{% block title %}
+Instructions -- Please Read Carefully
+{% endblock %}
+
+{% block content %}
+
+<div class="box1">
+	<p> <b>You will be asked to answer questions about these instructions and you will not be able to proceed unless you answer all questions correctly! </b> </p>
+
+	  <p> <b> If you do not fully understand the instructions, we cannot use your data in our study. Please <a href="mailto:ycliang@stanford.edu?Subject=MTurk%20Study" target="_top">email me</a> if you feel you understood everything but the tests do not let you pass. </b> </p>
+</div>
+
+
+	<h3>Overview:</h3>
+
+<p>
+	This study takes around {{Constants.minutes}} minutes to complete. The main part of the study consists of {{Constants.num_rounds}} questions about money. <b>All questions in the main part count for your bonus payment.</b> Depending on the accuracy of your answer, you may receive a bonus of between {{Constants.bonus_0}} and {{Constants.bonus_2}} for each question.
+</p>
+
+<p>
+	The study ends with a very short survey that you also need to complete to be paid any bonus payments.
+</p>
+
+
+	<h3>Questions:</h3>
+
+    <p>All {{Constants.num_rounds}} questions takes the following form: </p>
+
+<blockquote><p>"Suppose the rate of return on a savings account is [X%] per year. What is the <b>minimum</b> amount of dollars you have to put into this account now (the start of year 1) in order to withdraw [AMOUNTS OF DOLLARS] at [DATES]? (Note: You are permitted to withdraw both interest and principal.)"</p></blockquote>
+
+<p> To help you understand the questions better, there will be a chart under each question illustrating the amount of dollars you need to withdraw from the savings account at each date. For example, our first question will be </p>
+
+<blockquote><p>"{{example_question}}"</p></blockquote>
+
+<p>And the chart below will follow this question. The blue bar between 1 and 2 on the horizontal axis indicates the amount of money that you need to withdraw at the end of year 1 (or, equivalently, at the start of year 2).</p>
+
+<img src="{% static example_chart %}" width="800" class="box2"/>
+
+	<h3>Payment:</h3>
+
+<p>Each question has a correct answer. If the difference between your answer and the correct answer is within {{threshold_1}}% of the correct answer, you will earn {{Constants.bonus_2}} for that question. If the difference is between {{threshold_1}}% and {{threshold_0}}% of the correct answer, you will earn {{Constants.bonus_1}}. Otherwise, you will not earn rewards for this question.
+</p>
+
+<p>
+	We urge you to be <b>truthful</b> and <b> thoughtful </b> in answering the questions because <b>our research's quality depends on it!</b>
+</p>
+
+	<h3>Survey:</h3>
+
+<p>
+	At the very end of the survey, we will ask you a few demographic questions. We thank you for answering these questions carefully and truthfully. You will need to complete the survey in order to be paid any bonus. You will still be eligible for bonus payment even if you choose the option "I prefer not to answer" for some or all the questions.
+ </p>
+
+     {% next_button %}
+
+{% endblock %}
+
+
+{% block styles %}
+ <style type="text/css">
+ div.box1 {
+    padding: 10px;
+    border: 3px solid red;
+    margin: 0;
+}
+ img.box2 {
+    padding: 10px;
+    border: 1px solid #eee;
+    margin: 0;
+	 }
+ </style>
+{% endblock %}

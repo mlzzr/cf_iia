@@ -1,0 +1,28 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+
+{% block title %}
+    Results
+{% endblock %}
+
+{% block content %}
+    <p>
+        Thank you so much for completing this survey! We really appreciate your contribution to our study!
+    </p>
+
+    <h3>Payment:</h3>
+    <p>
+        The amount of bonus you win is {{bonus}}. Together with the HIT fee of {{Constants.base_pay}}, you will receive {{total_pay}} in total.
+    </p>
+
+    <p>
+        We will make all payments as soon as possible.
+    </p>
+
+	<p>If you have any further questions or suggestions, please do not hesitate to contact <a href="mailto:ycliang@stanford.edu?Subject=MTurk%20Study" target="_top">me</a>. Please do contact me with any negative or positive feedback and in particular with any difficulties or bugs you encountered. And do not forget to rate me on Turkopticon!
+    </p>
+
+    {% next_button %}
+{% endblock %}
+
+

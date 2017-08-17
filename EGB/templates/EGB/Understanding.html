@@ -1,0 +1,55 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+
+{% block title %}
+    Instruction Comprehension Questions
+{% endblock %}
+
+{% block content %}
+
+    <p>
+        Please answer the following questions carefully. You cannot proceed (and hence will not be paid any bonus) unless you answer all true/false questions correctly. <b> You will be excluded from this study if you answer these questions incorrectly too often. </b>
+    </p>
+
+
+{% formfield player.truefalse1 %}
+{% formfield player.truefalse2 %}
+<p><b>In the chart below, how many years are there between now and the date of the withdrawal of $100?</b></p>
+<img src="{% static question_chart %}" width="800" class="box2"/>
+{% formfield player.truefalse3 %}
+
+    {% next_button %}
+
+
+<div class="panel-group" id="accordion">
+    <div class="panel panel-warning" id="panel1">
+        <div class="panel-heading">
+             <h4 class="panel-title">
+        <a data-toggle="collapse" data-target="#collapseOne" class="btn-block" href="#collapseOne">
+            Instructions -- Click to collapse
+        </a>
+      </h4>
+
+        </div>
+        <div id="collapseOne" class="panel-collapse collapse in" data-toggle="false">
+            <div class="panel-body">
+ 
+<small> {% include  "EGB/ShortIns.html"%} </small>
+        </div>
+    </div>
+</div>
+</div>
+
+
+{% endblock %}
+
+{% block styles %}
+ <style type="text/css">
+
+ img.box2 {
+    padding: 10px;
+    border: 1px solid #eee;
+    margin: 0;
+	 }
+ </style>
+{% endblock %}
