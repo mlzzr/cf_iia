@@ -178,7 +178,7 @@ SESSION_CONFIGS = [
             'frame_height': 800,
             'preview_template': 'global/MTurkPreview2.html',
             'minutes_allotted_per_assignment': 120,
-            'expiration_hours': 7*24, # 7 days
+            'expiration_hours': 7*24,  # 7 days
             'grant_qualification_id': '3SFGOZQ0QP9FTMWL37V9SYPG2VPC6V',# to prevent retakes
             'qualification_requirements': [
                 qualification.LocaleRequirement("EqualTo", "US"),
@@ -188,29 +188,29 @@ SESSION_CONFIGS = [
             ]
         },
     },
-    {
-        'name': 'EGB',
-        'display_name': 'Discounting income flows',
-        'num_demo_participants': 9,
-        'app_sequence': ['EGB'],
-        'participation_fee': 2.00,
-        'mturk_hit_settings': {
-            'keywords': ['easy', 'bonus', 'money', 'economics', 'study'],
-            'title': '30 minutes STANFORD UNIVERSITY study: Earn up to $7.50',
-            'description': 'We are conducting an academic survey on individual decision making. In the course of the study, we will ask you a number of questions about money. In addition to the HIT reward, you may receive up to $5.50 of bonus, depending on your answer.',
-            'frame_height': 800,
-            'preview_template': 'global/MTurkPreview3.html',
-            'minutes_allotted_per_assignment': 120,
-            'expiration_hours': 7*24, # 7 days
-            # 'grant_qualification_id': '36ME306TQB42ZI662XFAHMYGPTYSKD',# to prevent retakes
-            'qualification_requirements': [
-                qualification.LocaleRequirement("EqualTo", "US"),
-                qualification.PercentAssignmentsApprovedRequirement("GreaterThanOrEqualTo", 97),
-                # qualification.NumberHitsApprovedRequirement("GreaterThanOrEqualTo", 2000),
-                # qualification.Requirement('36ME306TQB42ZI662XFAHMYGPTYSKD', 'DoesNotExist')
-            ]
-        },
-    },
+    # {
+    #     'name': 'EGB',
+    #     'display_name': 'Discounting income flows',
+    #     'num_demo_participants': 9,
+    #     'app_sequence': ['EGB'],
+    #     'participation_fee': 2.00,
+    #     'mturk_hit_settings': {
+    #         'keywords': ['easy', 'bonus', 'money', 'economics', 'study'],
+    #         'title': '30 minutes STANFORD UNIVERSITY study: Earn up to $7.50',
+    #         'description': 'We are conducting an academic survey on individual decision making. In the course of the study, we will ask you a number of questions about money. In addition to the HIT reward, you may receive up to $5.50 of bonus, depending on your answer.',
+    #         'frame_height': 800,
+    #         'preview_template': 'global/MTurkPreview3.html',
+    #         'minutes_allotted_per_assignment': 120,
+    #         'expiration_hours': 7*24,  # 7 days
+    #         # 'grant_qualification_id': '36ME306TQB42ZI662XFAHMYGPTYSKD',# to prevent retakes
+    #         'qualification_requirements': [
+    #             qualification.LocaleRequirement("EqualTo", "US"),
+    #             qualification.PercentAssignmentsApprovedRequirement("GreaterThanOrEqualTo", 97),
+    #             # qualification.NumberHitsApprovedRequirement("GreaterThanOrEqualTo", 2000),
+    #             # qualification.Requirement('36ME306TQB42ZI662XFAHMYGPTYSKD', 'DoesNotExist')
+    #         ]
+    #     },
+    # },
 
 ]
 
