@@ -75,7 +75,7 @@ Instructions -- Please Read Carefully
             <b>The consultant that comes to your service is {% if senior %}Bob {% else %} Mike {% endif %}.</b>
         </p>
         <p>
-            <b>{% if senior %}Bob: {% else %}Mike: {% endif %}"The investment is {% if signal %}Good{% else %}Bad{% endif %}".</b>
+            <b>{% if senior %}Bob's report: {% else %}Mike's report: {% endif %}"The investment is {% if signal %}Good{% else %}Bad{% endif %}".</b>
         </p>
         <p><b>Do you want to take the investment opportunity or a lottery that pays you {{Constants.high_bonus}} with {{lottery_odds}}% chance?</b></p>
         {% formfield player.investment %}

@@ -44,7 +44,7 @@ class Instructions(Page):
 			summand += 1
 		if values["blank2"] != Constants.treatment_dict['high_acc'][self.player.treatment]:
 			summand += 1
-		if values["blank3"] != Constants.treatment_dict['low_acc'][self.player.treatment]:
+		if values["blank3"] != 100 - Constants.treatment_dict['low_acc'][self.player.treatment]:
 			summand += 1
 		if summand > 1 and self.player.participant.vars.get('failure') < Constants.failuretolerance:
 			self.player.participant.vars['failure'] = 1 + self.player.participant.vars.get('failure')
