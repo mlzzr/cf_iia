@@ -238,13 +238,13 @@ SESSION_CONFIGS = [
             'preview_template': 'global/MTurkPreview4.html',
             'minutes_allotted_per_assignment': 120,
             'expiration_hours': 7 * 24,  # 7 days
-            'grant_qualification_id': '355NDHMUE29BCFPW40YDM42TVUYCF4',  # to prevent retakes
+            # 'grant_qualification_id': '355NDHMUE29BCFPW40YDM42TVUYCF4',  # to prevent retakes
             'qualification_requirements': [
                 qualification.LocaleRequirement("EqualTo", "US"),
                 qualification.PercentAssignmentsApprovedRequirement("GreaterThanOrEqualTo", 97),
-                qualification.NumberHitsApprovedRequirement("GreaterThanOrEqualTo", 1000),
-                qualification.Requirement('36ME306TQB42ZI662XFAHMYGPTYSKD', 'DoesNotExist'),
-                qualification.Requirement('355NDHMUE29BCFPW40YDM42TVUYCF4', 'DoesNotExist'),
+                # qualification.NumberHitsApprovedRequirement("GreaterThanOrEqualTo", 1000),
+                # qualification.Requirement('36ME306TQB42ZI662XFAHMYGPTYSKD', 'DoesNotExist'),
+                # qualification.Requirement('355NDHMUE29BCFPW40YDM42TVUYCF4', 'DoesNotExist'),
             ]
         },
     },
