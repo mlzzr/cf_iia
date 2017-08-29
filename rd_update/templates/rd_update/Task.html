@@ -1,0 +1,113 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+
+{% block title %}
+Instructions -- Please Read Carefully
+{% endblock %}
+
+{% block content %}
+<div class="panel-group" id="accordion">
+    <div class="panel panel-warning" id="panel1">
+        <div class="panel-heading">
+             <h4 class="panel-title">
+        <a data-toggle="collapse" data-target="#collapseOne" class="btn-block" href="#collapseOne">
+            Task description -- Click to collapse
+        </a>
+      </h4>
+
+        </div>
+        <div id="collapseOne" class="panel-collapse collapse in" data-toggle="false">
+            <div class="panel-body">
+
+	<h3>Task description:</h3>
+
+<p>There are 100 investment opportunities. We <b>randomly</b> pick one investment opportunity and offer it to you <b>for free</b>. <b>Out of the 100 investments there are {{prior_g}} good ones.</b> Suppose you take the investment, you will receive the bonus of {{Constants.high_bonus}} if the investment is good and no bonus if the investment is bad.
+
+<p>Before you decide whether to take the investment opportunity, we will also assign a consultant to help you inspect its quality. After the inspection, the consultant will report to you whether he thinks the investment is good or bad. <b>The consultant is either Bob or Mike.</b> Both Bob and Mike may make mistakes, but Bob makes mistakes less often. The table below summarizes how a consultant will report under each scenario.</p>
+
+<table class="tg">
+  <tr>
+    <th class="tg-baqh">Investment quality</th>
+    <th class="tg-baqh">Good ({{prior_g}} out of 100 times)</th>
+    <th class="tg-baqh">Bad ({{prior_b}} out of 100 times)</th>
+  </tr>
+  <tr>
+    <td class="tg-s6z2" rowspan="2">Bob's report</td>
+    <td class="tg-baqh">{{high_acc}}% of the times: "The investment is Good."</td>
+    <td class="tg-baqh">{{high_acc}}% of the times: "The investment is Bad."</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">{{high_err}}% of the times: "The investment is Bad."</td>
+    <td class="tg-yw4l">{{high_err}}% of the times: "The investment is Good."</td>
+  </tr>
+  <tr>
+    <td class="tg-s6z2" rowspan="2">Mike's report</td>
+    <td class="tg-baqh">{{low_acc}}% of the times: "The investment is Good."</td>
+    <td class="tg-baqh">{{low_acc}}% of the times: "The investment is Bad."</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">{{low_err}}% of the times: "The investment is Bad."</td>
+    <td class="tg-yw4l">{{low_err}}% of the times: "The investment is Good."</td>
+  </tr>
+</table>
+
+<p>To understand this table, let's take the two cells corresponding to "Good ({{prior_g}} out of 100 times)" and "Bob's report" as an example. These two cells say that <b>if the investment is indeed good</b>, then Bob will say "The investment is Good" {{high_acc}}% of the times, but will mistakenly say "The investment is Bad" {{high_err}}% of the times. The other cells should be interpreted similarly.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+    <div  id="hide">
+        <button type="button" class="btn btn-primary btn-large" onclick="
+        document.getElementById('report').style.display='block';
+        document.getElementById('hide').style.display = 'none'"
+        >
+            Pick a consultant and read his report
+        </button>
+
+    </div>
+
+<br>
+
+    <div id="report" style="display:none">
+        <p>
+            <b>The consultant that comes to your service is {% if senior %}Bob {% else %} Mike {% endif %}.</b>
+        </p>
+        <p>
+            <b>{% if senior %}Bob: {% else %}Mike: {% endif %}"The investment is {% if signal %}Good{% else %}Bad{% endif %}".</b>
+        </p>
+        <p><b>Do you want to take the investment opportunity or a lottery that pays you {{Constants.high_bonus}} with {{lottery_odds}}% chance?</b></p>
+        {% formfield player.investment %}
+
+     {% next_button %}
+    </div>
+
+
+
+{% endblock %}
+
+
+{% block styles %}
+ <style type="text/css">
+ div.box1 {
+    padding: 10px;
+    border: 3px solid red;
+    margin: 0;
+}
+	 img.box2 {
+    padding: 10px;
+    border: 1px solid #eee;
+    margin: 0;
+	 }
+	.tg  {border-collapse:collapse;border-spacing:0;}
+	.tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}
+	.tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}
+	.tg .tg-s6z2{text-align:center}
+	.tg .tg-baqh{text-align:center;vertical-align:top}
+	.tg .tg-yw4l{vertical-align:top}
+      .input-group {
+        max-width: 100px;
+      }
+ </style>
+{% endblock %}

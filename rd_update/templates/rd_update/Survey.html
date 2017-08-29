@@ -1,0 +1,20 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+
+{% block title %}
+    Survey: please take your time in answering these questions carefully!
+{% endblock %}
+
+{% block content %}
+
+    <p>
+        Please answer the following questions. Your answers to these questions do <b>not</b> affect your payment for this study. You will be eligible for bonus payment even if you choose the option "I prefer not to answer" for some or all the questions.
+    </p>
+
+    {% for field in form %}
+        {% formfield field %}
+    {% endfor %}
+
+    {% next_button %}
+
+{% endblock %}

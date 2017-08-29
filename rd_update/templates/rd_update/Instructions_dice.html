@@ -1,0 +1,128 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+
+{% block title %}
+Instructions -- Please Read Carefully
+{% endblock %}
+
+{% block content %}
+
+<div class="box1">
+	<p> <b>You will be asked to answer questions about these instructions and you will not be able to proceed unless you answer all questions correctly! </b> </p>
+
+	  <p> <b> If you do not fully understand the instructions, we cannot use your data in our study. Please <a href="mailto:ycliang@stanford.edu?Subject=MTurk%20Study" target="_top">email me</a> if you feel you understood everything but the tests do not let you pass. </b> </p>
+</div>
+
+
+	<h3>Overview:</h3>
+
+<p>
+
+	This study has 2 parts. At the end of the study, the computer will randomly select one part. Then, within that part, the computer will randomly select one question. Your payment will depend on your answer to that question!
+</p>
+
+<p>
+	Therefore, <b>you should treat each question in each part as if it was the one that counts and determines your payment for the entire study</b> - because it may very well be!
+	The study ends with a very short survey that you also need to complete to be paid any bonus payments.
+</p>
+
+
+	<h3>Part 1</h3>
+
+<p>In the study, we have two <b>10-sided fair dices</b>, one <span style="color:red"><b>red</b></span> and one <span style="color:blue"><b>blue</b></span>. At the start of the study, the computer will secretly roll the two dices. It is up to your choice which one of them will determine your bonus. If you choose the <span style="color:red"><b>red</b></span> dice, you will win {{Constants.high_bonus}} if it rolls <b>no more than {{Constants.threshold_red}}</b>.  If you choose the <span style="color:blue"><b>blue</b></span> dice, you will win {{Constants.high_bonus}} if it rolls <b>no more than {{Constants.threshold_blue}}</b>. The table below summarizes all the scenarios.
+</p>
+
+<table class="table">
+	<tr>
+		<th></th>
+		<th>Win {{Constants.high_bonus}}</th>
+		<th>Don't win</th>
+	</tr>
+	<tr>
+		<td>Choose <span style="color:red"><b>red</b></span></td>
+		<td><span style="color:red">{{red_win_numbers}}</span></td>
+		<td><span style="color:red">{{red_lose_numbers}}</span></td>
+	</tr>
+	<tr>
+		<td>Choose <span style="color:blue"><b>blue</b></span></td>
+		<td><span style="color:blue">{{blue_win_numbers}}</span></td>
+		<td><span style="color:blue">{{blue_lose_numbers}}</span></td>
+	</tr>
+</table>
+
+<p>While you will not receive any information about the result of the <span style="color:blue"><b>blue</b></span> dice roll before you make a decision, you will receive some information about the <span style="color:red"><b>red</b></span> dice roll. Specifically, a robot will inspect the result of the <span style="color:red"><b>red</b></span> dice roll and give you feedback on whether you will win if you choose <span style="color:red"><b>red</b></span>. The robot could either be an <b>expert</b> or an <b>amateur</b>. Both the expert and the amateur may give you a wrong feedback, but the expert is correct more often than the amateur. The table below summarizes the feedback you will see under different scenarios.</p>
+
+<table class="tg">
+  <tr>
+    <th class="tg-baqh"><span style="color:red">Red</span> dice roll</th>
+	  <th class="tg-baqh"><span style="color:red">{{red_win_numbers}}</span></th>
+	  <th class="tg-baqh"><span style="color:red">{{red_lose_numbers}}</span></th>
+  </tr>
+  <tr>
+    <td class="tg-s6z2" rowspan="2">Expert's report</td>
+    <td class="tg-baqh">{{high_acc}}% of the times: "You will <b>win</b> if you choose <span style="color:red"><b>red</b></span>."</td>
+    <td class="tg-baqh">{{high_acc}}% of the times: "You will <b>lose</b> if you choose <span style="color:red"><b>red</b></span>."</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">{{high_err}}% of the times: "You will <b>lose</b> if you choose <span style="color:red"><b>red</b></span>."</td>
+    <td class="tg-yw4l">{{high_err}}% of the times: "You will <b>win</b> if you choose <span style="color:red"><b>red</b></span>."</td>
+  </tr>
+  <tr>
+    <td class="tg-s6z2" rowspan="2">Amateur's report</td>
+    <td class="tg-baqh">{{low_acc}}% of the times: "You will <b>win</b> if you choose <span style="color:red"><b>red</b></span>."</td>
+    <td class="tg-baqh">{{low_acc}}% of the times: "You will <b>lose</b> if you choose <span style="color:red"><b>red</b></span>."</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">{{low_err}}% of the times: "You will <b>lose</b> if you choose <span style="color:red"><b>red</b></span>."</td>
+    <td class="tg-yw4l">{{low_err}}% of the times: "You will <b>win</b> if you choose <span style="color:red"><b>red</b></span>."</td>
+  </tr>
+</table>
+
+
+<p>If the <span style="color:red"><b>red</b></span> dice roll is one of {{red_win_numbers}}, the <b>expert</b> will report "You will win by choosing <span style="color:red"><b>red</b></span>" <b>{{high_acc}}</b> of the times, but will mistakenly say "You will lose by choosing <span style="color:red"><b>red</b></span>" <b>{{high_err}}</b> of the times.   </p>
+
+<p>At the beginning of each round, the computer will select either Box A or Box B by tossing a fair coin. <b>Hence, each of the two boxes has 50% chance of being selected.</b> </p>
+
+<img src="{% static urn_image %}" width="600" class="box2"/>
+
+<p> We will <b>not</b> tell you which box was actually selected by the computer, but you will get a piece of information: by clicking the button <button type="button" class="btn btn-primary btn-large">{{Constants.button_label}}</button>, the computer will randomly draw a ball from the selected box and show it to you. <b>Each ball in the box is equally likely to be drawn.</b> After the computer draws a ball, you may see the following message:</p>
+
+
+<p>
+	We urge you to be <b>truthful</b> and <b> thoughtful </b> in answering the questions because <b>our research's quality depends on it!</b>
+</p>
+
+
+
+	<h3>Survey</h3>
+
+<p>
+
+	At the very end of the survey, we will ask you a few demographic questions. We thank you for answering these questions carefully and truthfully. You will need to complete the survey in order to be paid any bonus. You will still be eligible for bonus payment even if you choose the option "I prefer not to answer" for some or all the questions.
+ </p>
+
+     {% next_button %}
+
+{% endblock %}
+
+
+{% block styles %}
+ <style type="text/css">
+ div.box1 {
+    padding: 10px;
+    border: 3px solid red;
+    margin: 0;
+}
+	 img.box2 {
+    padding: 10px;
+    border: 1px solid #eee;
+    margin: 0;
+	 }
+	 .tg  {border-collapse:collapse;border-spacing:0;}
+.tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}
+.tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}
+.tg .tg-s6z2{text-align:center}
+.tg .tg-baqh{text-align:center;vertical-align:top}
+.tg .tg-yw4l{vertical-align:top}
+ </style>
+{% endblock %}

@@ -1,0 +1,36 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+
+
+{% block title %}
+Welcome!
+{% endblock %}
+
+{% block content %}
+
+
+    <p>
+    You are invited to participate in this research study run by the <b> Department of Economics </b> at <b> Stanford University </b>. 
+    </p>
+
+    <p> This survey will take approximately <b> 7 minutes </b> to complete. </p>
+
+    <p> 
+        This study will pay you a HIT payment of <b> $0.50 </b>. In addition, you may receive an additional bonus payment of <b> $1.00 </b> depending on your answer and some luck. Thus, you will earn between <b>$0.50</b> and <b>$1.50</b>  from completing this study.
+    </p>
+
+    <p>
+        You are allowed to withdraw from the study at any point of time. You do not have to complete any questions you are uncomfortable with. However, you will only be paid any bonus payments if you pass all comprehension checks and complete the full survey.
+    </p> 
+
+
+    <p>
+        <b>  The veracity of all information and instructions given in this study are guaranteed by the Department of Economics at Stanford University as well as the IRB protocol under which this study runs (IRB-41767).</b>
+    </p>
+
+    <p> A full set of information required for you to be able to consent to participating in this study follows on the next screen. Full instructions on the study will follow in the course of the study.
+    </p>
+
+    {% next_button %}
+
+{% endblock %}

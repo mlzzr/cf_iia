@@ -1,0 +1,118 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+
+{% block title %}
+Instructions -- Please Read Carefully
+{% endblock %}
+
+{% block content %}
+
+<div class="box1">
+	<p> <b>You will be asked to answer questions about these instructions and you will not be able to proceed unless you answer all questions correctly! </b> </p>
+
+	  <p> <b> If you do not fully understand the instructions, we cannot use your data in our study. Please <a href="mailto:ycliang@stanford.edu?Subject=MTurk%20Study" target="_top">email me</a> if you feel you understood everything but the tests do not let you pass. </b> </p>
+</div>
+
+
+	<h3>Overview:</h3>
+
+<p>
+This task asks you to choose between an investment and a lottery. You will receive the bonus of {{Constants.high_bonus}} if your choice pays out and no bonus otherwise. The study ends with a very short survey that you also need to complete to be paid any bonus payments.
+</p>
+
+
+	<h3>Task description:</h3>
+
+<p>There are 100 investment opportunities. We <b>randomly</b> pick one investment opportunity and offer it to you <b>for free</b>. <b>Out of the 100 investments there are {{prior_g}} good ones.</b> Suppose you take the investment, you will receive the bonus of {{Constants.high_bonus}} if the investment is good and no bonus if the investment is bad.
+
+<p>Before you decide whether to take the investment opportunity, we will also assign a consultant to help you inspect its quality. After the inspection, the consultant will report to you whether he thinks the investment is good or bad. <b>The consultant is either Bob or Mike.</b> Both Bob and Mike may make mistakes, but Bob makes mistakes less often. The table below summarizes how a consultant will report under each scenario.</p>
+
+<table class="tg">
+  <tr>
+    <th class="tg-baqh">Investment quality</th>
+    <th class="tg-baqh">Good ({{prior_g}} out of 100 times)</th>
+    <th class="tg-baqh">Bad ({{prior_b}} out of 100 times)</th>
+  </tr>
+  <tr>
+    <td class="tg-s6z2" rowspan="2">Bob's report</td>
+    <td class="tg-baqh">{{high_acc}}% of the times: "The investment is Good."</td>
+    <td class="tg-baqh">{{high_acc}}% of the times: "The investment is Bad."</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">{{high_err}}% of the times: "The investment is Bad."</td>
+    <td class="tg-yw4l">{{high_err}}% of the times: "The investment is Good."</td>
+  </tr>
+  <tr>
+    <td class="tg-s6z2" rowspan="2">Mike's report</td>
+    <td class="tg-baqh">{{low_acc}}% of the times: "The investment is Good."</td>
+    <td class="tg-baqh">{{low_acc}}% of the times: "The investment is Bad."</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">{{low_err}}% of the times: "The investment is Bad."</td>
+    <td class="tg-yw4l">{{low_err}}% of the times: "The investment is Good."</td>
+  </tr>
+</table>
+
+<p>To understand this table, let's take the two cells corresponding to "Good ({{prior_g}} out of 100 times)" and "Bob's report" as an example. These two cells say that <b>if the investment is indeed good</b>, then Bob will say "The investment is Good" {{high_acc}}% of the times, but will mistakenly say "The investment is Bad" {{high_err}}% of the times. The other cells should be interpreted similarly.</p>
+
+<p>After the consultant makes his report, you will have to make a decision. <b>You can either take the investment opportunity, or you can take a lottery that gives you the bonus of {{Constants.high_bonus}} with a certain chance and no bonus otherwise.</b> After you make your decision, we will reveal the quality of the investment as well as the result of the lottery and you will be paid accordingly.</p>
+
+<p>Before you proceed, we need to ask you some comprehension questions to make sure that you understand the task. Click the button below to go to the comprehension questions.</p>
+
+    <div  id="hide">
+        <button type="button" class="btn btn-primary btn-large" onclick="
+        document.getElementById('understanding').style.visibility='visible';
+        document.getElementById('hide').style.display = 'none'"
+        >
+            Go to comprehension questions
+        </button>
+
+    </div>
+
+    <br>
+
+    <div id="understanding" style="visibility:hidden">
+	<h3>Comprehension questions:</h3>
+        {% formfield player.truefalse1 %}
+        {% formfield player.truefalse2 %}
+        {% formfield player.truefalse3 %}
+		<p><b>Among the 100 investment opportunities the experimenter picks from, how many of them are good?</b></p>
+		{% formfield player.blank1 with label='' %}
+		<p><b>If the investment opportunity is indeed good, how likely will Bob say "The investment is Good"?</b></p>
+		<div class="input-group">
+            {{ form.blank2}}<span class="input-group-addon">%</span>
+        </div>
+		<p><b>If the investment opportunity is indeed good, how likely will Mike say "The investment is Good"?</b></p>
+		<div class="input-group">
+            {{ form.blank3}}<span class="input-group-addon">%</span>
+        </div>
+     {% next_button %}
+	</div>
+
+
+{% endblock %}
+
+
+{% block styles %}
+ <style type="text/css">
+ div.box1 {
+    padding: 10px;
+    border: 3px solid red;
+    margin: 0;
+}
+	 img.box2 {
+    padding: 10px;
+    border: 1px solid #eee;
+    margin: 0;
+	 }
+	.tg  {border-collapse:collapse;border-spacing:0;}
+	.tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}
+	.tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}
+	.tg .tg-s6z2{text-align:center}
+	.tg .tg-baqh{text-align:center;vertical-align:top}
+	.tg .tg-yw4l{vertical-align:top}
+      .input-group {
+        max-width: 100px;
+      }
+ </style>
+{% endblock %}

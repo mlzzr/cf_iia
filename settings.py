@@ -224,7 +224,30 @@ SESSION_CONFIGS = [
             ]
         },
     },
-
+    {
+        'name': 'rd_update',
+        'display_name': 'Reference Dependence',
+        'num_demo_participants': 9,
+        'app_sequence': ['rd_update'],
+        'participation_fee': 0.50,
+        'mturk_hit_settings': {
+            'keywords': ['easy', 'bonus', 'short', 'economics', 'study'],
+            'title': '7 minutes STANFORD UNIVERSITY study: Earn up to $1.50',
+            'description': 'We are conducting an academic survey on individual decision making. In the course of the study, we will ask you make a choice. In addition to the HIT reward, you may receive $1.00 of bonus, depending on your choice and some luck.',
+            'frame_height': 800,
+            'preview_template': 'global/MTurkPreview4.html',
+            'minutes_allotted_per_assignment': 120,
+            'expiration_hours': 7 * 24,  # 7 days
+            'grant_qualification_id': '355NDHMUE29BCFPW40YDM42TVUYCF4',  # to prevent retakes
+            'qualification_requirements': [
+                qualification.LocaleRequirement("EqualTo", "US"),
+                qualification.PercentAssignmentsApprovedRequirement("GreaterThanOrEqualTo", 97),
+                qualification.NumberHitsApprovedRequirement("GreaterThanOrEqualTo", 1000),
+                qualification.Requirement('36ME306TQB42ZI662XFAHMYGPTYSKD', 'DoesNotExist'),
+                qualification.Requirement('355NDHMUE29BCFPW40YDM42TVUYCF4', 'DoesNotExist'),
+            ]
+        },
+    },
 ]
 
 # anything you put after the below line will override
