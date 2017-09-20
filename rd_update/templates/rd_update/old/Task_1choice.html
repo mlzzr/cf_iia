@@ -1,0 +1,81 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+
+{% block title %}
+Instructions -- Please Read Carefully
+{% endblock %}
+
+{% block content %}
+<div class="panel-group" id="accordion">
+    <div class="panel panel-warning" id="panel1">
+        <div class="panel-heading">
+             <h4 class="panel-title">
+        <a data-toggle="collapse" data-target="#collapseOne" class="btn-block" href="#collapseOne">
+            Task description -- Click to collapse
+        </a>
+      </h4>
+
+        </div>
+        <div id="collapseOne" class="panel-collapse collapse in" data-toggle="false">
+            <div class="panel-body">
+
+{% include "cf_update/ShortIns.html"%}
+            </div>
+        </div>
+    </div>
+</div>
+
+
+    <div  id="hide">
+        <button type="button" class="btn btn-primary btn-large" onclick="
+        document.getElementById('report').style.display='block';
+        document.getElementById('hide').style.display = 'none'"
+        >
+            Request a consultant and read his report
+        </button>
+
+    </div>
+
+<br>
+
+    <div id="report" style="display:none">
+        <p>
+            <b>The consultant that comes to your service is {% if senior %}Bob {% else %} Mike {% endif %}.</b>
+        </p>
+        <p>
+            <b>{% if senior %}Bob's report: {% else %}Mike's report: {% endif %}"The investment is {% if signal %}Good{% else %}Bad{% endif %}".</b>
+        </p>
+        <p><b>Do you want to take the investment opportunity or a lottery that pays you {{Constants.high_bonus}} with {{lottery_odds}}% chance?</b></p>
+        {% formfield player.investment %}
+
+     {% next_button %}
+    </div>
+
+
+
+{% endblock %}
+
+
+{% block styles %}
+ <style type="text/css">
+ div.box1 {
+    padding: 10px;
+    border: 3px solid red;
+    margin: 0;
+}
+	 img.box2 {
+    padding: 10px;
+    border: 1px solid #eee;
+    margin: 0;
+	 }
+	.tg  {border-collapse:collapse;border-spacing:0;}
+	.tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}
+	.tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}
+	.tg .tg-s6z2{text-align:center}
+	.tg .tg-baqh{text-align:center;vertical-align:top}
+	.tg .tg-yw4l{vertical-align:top}
+      .input-group {
+        max-width: 100px;
+      }
+ </style>
+{% endblock %}

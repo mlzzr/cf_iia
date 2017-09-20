@@ -20,25 +20,22 @@ class Constants(BaseConstants):
     # Basics
     name_in_url = 'yliangStanfordUpdateExperiment5'
     players_per_group = None
-    failuretolerance = 8  # for understanding questions
+    update_prob = 0.8  # prob that cf_update is chosen for payment
+    failuretolerance = 7  # for understanding questions
 
     # Treatments
     treatment_dict = {
-        'senior_prob': [50, 50, 50, 20, 90],
-        'good_prior': [40, 40, 40, 40, 40],
-        'high_acc': [75, 90, 75, 75, 75],
-        'low_acc': [75, 75, 60, 60, 60],
+        'senior_prob': [1, 99],
+        'good_prior': [40, 40],
+        'high_acc': [90, 75],
+        'low_acc': [75, 60],
     }
     num_treatments = len(treatment_dict['senior_prob'])
     num_rounds = 1
-    session_treatments = [1, 1, 1, 0, 0]
-    sample_sizes = [50, 100, 100, 250, 60]
-    treatment_prob = [a*b for a, b in zip(session_treatments, sample_sizes)] / np.dot(session_treatments, sample_sizes)
 
-    # BDM
-    num_rows = 20
-    right_side_odds = [98 - i * 5 for i in range(num_rows)]
-    selection_prob = [.02, .02, .02, .02, .02, .02, .02, .02, .08, .08, .08, .08, .08, .08, .08, .08, .08, .08, .02, .02]
+    # Only for templates
+    good_message = '"The investment is Good."'
+    bad_message = '"The investment is Bad."'
 
     # Payoff
     base_pay = c(0.5)
@@ -50,10 +47,7 @@ class Constants(BaseConstants):
 
     # Only for templates
     IRB = "IRB-42199"
-    minutes = 8
-    good_message = '"The investment is Good."'
-    bad_message = '"The investment is Bad."'
-    name_list = ['Bob', 'Mike']
+    minutes = 7
 
 class Subsession(BaseSubsession):
     # def creating_session(self):
@@ -62,19 +56,16 @@ class Subsession(BaseSubsession):
     #         p.treatment = next(treatments)
     def before_session_starts(self):
         if self.round_number == 1:
-            # treatments = itertools.cycle(range(Constants.num_treatments))
-            # for p in self.get_players():
-            #     p.treatment = next(treatments)
+            treatments = itertools.cycle(range(Constants.num_treatments))
             for p in self.get_players():
-                p.treatment = np.random.choice(Constants.num_treatments, p=Constants.treatment_prob)
+                p.treatment = next(treatments)
+            for p in self.get_players():
                 p.participant.vars['failure'] = 0
-                p.senior_name, p.junior_name = np.random.permutation(Constants.name_list)
                 p.high_acc = Constants.treatment_dict['high_acc'][p.treatment] / 100
                 p.low_acc = Constants.treatment_dict['low_acc'][p.treatment] / 100
                 p.senior_prob = Constants.treatment_dict['senior_prob'][p.treatment] / 100
                 p.good_prior = Constants.treatment_dict['good_prior'][p.treatment] / 100
                 p.senior = np.random.binomial(1, p.senior_prob)
-                p.acc = p.senior * p.high_acc + (1 - p.senior) * p.low_acc
                 p.good = np.random.binomial(1, p.good_prior)
                 if p.senior:
                     if p.good: 
@@ -94,6 +85,11 @@ class Subsession(BaseSubsession):
                         p.posterior = (p.good_prior * p.low_acc) / (p.good_prior * p.low_acc + (1 - p.good_prior) * (1 - p.low_acc))
                     else:
                         p.posterior = (p.good_prior * (1 - p.low_acc)) / (p.good_prior * (1 - p.low_acc) + (1 - p.good_prior) * p.low_acc)
+                if p.posterior > p.good_prior:
+                    p.lottery_odds = int(p.posterior * 20) * 5
+                else:
+                    p.lottery_odds = (int(p.posterior * 20) + 1) * 5
+                p.lottery_win = np.random.binomial(1, p.lottery_odds / 100)
 
 
 class Group(BaseGroup):
@@ -102,30 +98,33 @@ class Group(BaseGroup):
 
 class Player(BasePlayer):
     treatment = models.PositiveIntegerField()
-    senior_name = models.CharField()
-    junior_name = models.CharField()
     senior_prob = models.FloatField()
     high_acc = models.FloatField()
     low_acc = models.FloatField()
     good_prior = models.FloatField()
     senior = models.BooleanField()
-    acc = models.FloatField()
     good = models.BooleanField()
     signal = models.BooleanField()
     posterior = models.FloatField()
     lottery_odds = models.PositiveIntegerField()
     lottery_win = models.BooleanField()
-    answer = models.PositiveIntegerField()
-
+    investment = models.BooleanField(
+        choices=[
+            [1, 'The investment'],
+            [0, 'The lottery'],
+        ],
+        widget=widgets.RadioSelect()
+    )
 
 
     ## Understanding Questions
     failures = models.PositiveIntegerField()
-    truefalse1 = models.BooleanField(choices=[[1, 'True'], [0, 'False']], widget=widgets.RadioSelect())
-    truefalse2 = models.BooleanField(choices=[[1, 'True'], [0, 'False']], widget=widgets.RadioSelect())
-    truefalse3 = models.BooleanField(choices=[[1, 'True'], [0, 'False']], widget=widgets.RadioSelect())
-    truefalse4 = models.BooleanField(choices=[[1, 'True'], [0, 'False']], widget=widgets.RadioSelect())
-    multiple1 = models.IntegerField(widget=widgets.RadioSelect())
+    truefalse1 = models.BooleanField(choices=[[1, 'True'], [0, 'False']], widget=widgets.RadioSelect(),
+                                     verbose_name="Both the investment opportunity and the lottery are free.")
+    truefalse2 = models.BooleanField(choices=[[1, 'True'], [0, 'False']], widget=widgets.RadioSelect(),
+                                     verbose_name="Each one of the 100 investment opportunities is equally likely to be picked by the experimenter to offer to me.")
+    truefalse3 = models.BooleanField(choices=[[1, 'True'], [0, 'False']], widget=widgets.RadioSelect(),
+                                     verbose_name="Either Bob or Mike will report to me, but not both.")
     blank1 = models.PositiveIntegerField()
     blank2 = models.PositiveIntegerField()
     blank3 = models.PositiveIntegerField()
@@ -142,9 +141,9 @@ class Player(BasePlayer):
 
 
     def calculate_bonus(self):
-        self.lottery_odds = np.random.choice(Constants.right_side_odds, p=Constants.selection_prob)
-        self.lottery_win = np.random.binomial(1, self.lottery_odds / 100)
-        if self.answer >= self.lottery_odds:
-            self.participant.payoff = Constants.high_bonus * self.good
+        if self.investment:
+            if self.good:
+                self.participant.payoff = Constants.high_bonus
         else:
-            self.participant.payoff = Constants.high_bonus * self.lottery_win
+            if self.lottery_win:
+                self.participant.payoff = Constants.high_bonus

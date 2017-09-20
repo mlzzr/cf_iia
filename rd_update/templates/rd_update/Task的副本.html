@@ -46,7 +46,6 @@ Task
         <p>
             <b>{% if senior %}{{ player.senior_name }}'s report: {% else %}{{ player.junior_name }}'s report: {% endif %}"The investment is {% if signal %}Good{% else %}Bad{% endif %}".</b>
         </p>
-    <p><b>Please make the following comparisons.</b></p>
 
 
     <table class="table table-striped">
@@ -68,10 +67,11 @@ Task
                     <input type="radio" name="odds_{{ odds|json }}" value="left"
                            required>&nbsp;&nbsp;
                     <input type="radio" name="odds_{{ odds|json }}"
-                           value="right" data-odds="{{ odds|json }}" required>
+                           value="right" data-amount="{{ odds|json }}" required>
                 </td>
                 <td align="left">
-                    I prefer taking a lottery that pays out {{Constants.high_bonus}} with <b>{{ odds }}%</b> chance and {{ Constants.low_bonus }} otherwise.  </td>
+                    I prefer taking a lottery that pays out {{Constants.high_bonus}} with <b>{{ odds }}%</b> chance and no bonus otherwise.
+                </td>
             </tr>
         {% endfor %}
     </table>
@@ -81,11 +81,12 @@ Task
     <input type="hidden" name="answer" id="switchpoint"
            value=0>
 
-    {% next_button %}
+     {% next_button %}
     </div>
 
-{% endblock %}
 
+
+{% endblock %}
 
 {% block scripts %}
 <script>
@@ -127,13 +128,12 @@ $(document).ready(function () {
 
         for (i = 0; i < radios.length; ++i) {
             var radio = radios[i];
-            if (radio.value == 'right' && radio.checked) {
-                $('#switchpoint').val(radio.dataset.odds - 5); {# 5 is the step size of the right hand size odds #}
-{#                break;#}
+            if (radio.value == 'left' && radio.checked) {
+                $('#switchpoint').val(radio.dataset.odds);
+                break;
+            } else {
+                $('#switchpoint').val(0);
             }
-{#            else {#}
-{#                $('#switchpoint').val(0);#}
-{#            }#}
         }
     });
 

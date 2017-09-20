@@ -1,0 +1,49 @@
+	<h3>Task description:</h3>
+
+<p>There are 100 investment opportunities. We <b>randomly</b> pick one investment opportunity and offer it to you <b>for free</b>. <b>Out of the 100 investments there are {{prior_g}} good ones.</b> Suppose you take the investment, you will receive the bonus of {{Constants.high_bonus}} if the investment is good and no bonus if the investment is bad.
+
+<p>Before you decide whether to take the investment opportunity, we will also assign a consultant to help you inspect its quality. After the inspection, the consultant will report to you whether he thinks the investment is good or bad. <b>The consultant is either Bob or Mike.</b> Both Bob and Mike may make mistakes, but Bob makes mistakes less often. The list below enumerates how a consultant will report under each scenario.</p>
+
+    <p>If the investment is indeed good (which happens {{prior_g}} out of 100 times), then</p>
+    <ul>
+      <li>Bob will report {{Constants.good_message}} {{high_acc}}% of the times, but will mistakenly report {{Constants.bad_message}} {{high_err}}% of the times
+      </li>
+      <li>Mike will report {{Constants.good_message}} {{low_acc}}% of the times, but will mistakenly report {{Constants.bad_message}} {{low_err}}% of the times
+      </li>
+    </ul>
+
+    <p>If the investment is indeed bad (which happens {{prior_b}} out of 100 times), then</p>
+    <ul>
+      <li>Bob will report {{Constants.bad_message}} {{high_acc}}% of the times, but will mistakenly report {{Constants.good_message}} {{high_err}}% of the times
+      </li>
+      <li>Mike will report {{Constants.bad_message}} {{low_acc}}% of the times, but will mistakenly report {{Constants.good_message}} {{low_err}}% of the times
+      </li>
+    </ul>
+
+<table class="tg">
+  <tr>
+    <th class="tg-baqh">Investment quality</th>
+    <th class="tg-baqh">Good ({{prior_g}} out of 100 times)</th>
+    <th class="tg-baqh">Bad ({{prior_b}} out of 100 times)</th>
+  </tr>
+  <tr>
+    <td class="tg-s6z2" rowspan="2">Bob's report</td>
+    <td class="tg-baqh">{{high_acc}}% of the times: "The investment is Good."</td>
+    <td class="tg-baqh">{{high_acc}}% of the times: "The investment is Bad."</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">{{high_err}}% of the times: "The investment is Bad."</td>
+    <td class="tg-yw4l">{{high_err}}% of the times: "The investment is Good."</td>
+  </tr>
+  <tr>
+    <td class="tg-s6z2" rowspan="2">Mike's report</td>
+    <td class="tg-baqh">{{low_acc}}% of the times: "The investment is Good."</td>
+    <td class="tg-baqh">{{low_acc}}% of the times: "The investment is Bad."</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">{{low_err}}% of the times: "The investment is Bad."</td>
+    <td class="tg-yw4l">{{low_err}}% of the times: "The investment is Good."</td>
+  </tr>
+</table>
+
+<p>To understand this table, let's take the two cells corresponding to "Good ({{prior_g}} out of 100 times)" and "Bob's report" as an example. These two cells say that <b>if the investment is indeed good</b>, then Bob will say "The investment is Good" {{high_acc}}% of the times, but will mistakenly say "The investment is Bad" {{high_err}}% of the times. The other cells should be interpreted similarly.</p>

@@ -14,7 +14,7 @@ class IRB(Page):
 
 class Instructions(Page):
 	form_model = models.Player
-	form_fields = ['truefalse1', 'truefalse2', 'truefalse3', 'truefalse4', 'multiple1', 'blank1', 'blank2', 'blank3']
+	form_fields = ['truefalse1', 'truefalse2', 'truefalse3', 'blank1', 'blank2', 'blank3']
 
 	def is_displayed(self):
 		return self.round_number == 1
@@ -27,11 +27,7 @@ class Instructions(Page):
 			'high_err': 100 - Constants.treatment_dict['high_acc'][self.player.treatment],
 			'low_acc': Constants.treatment_dict['low_acc'][self.player.treatment],
 			'low_err': 100 - Constants.treatment_dict['low_acc'][self.player.treatment],
-			'senior_prob': Constants.treatment_dict['senior_prob'][self.player.treatment],
-			'junior_prob': 100 - Constants.treatment_dict['senior_prob'][self.player.treatment],
 		}
-	def multiple1_choices(self):
-		return [[1, self.player.senior_name], [-1, self.player.junior_name], [0, "I'm equally likely to get each of the two."] ]
 
 	def error_message(self, values):
 		if self.player.participant.vars.get('failure') == 0:
@@ -43,10 +39,6 @@ class Instructions(Page):
 		if values["truefalse2"] != True:
 			summand += 1
 		if values["truefalse3"] != True:
-			summand += 1
-		if values["truefalse4"] != True:
-			summand += 1
-		if values["multiple1"] != (self.player.senior_prob >= 0.5) - (self.player.senior_prob <= 0.5):
 			summand += 1
 		if values["blank1"] != Constants.treatment_dict['good_prior'][self.player.treatment]:
 			summand += 1
@@ -88,7 +80,6 @@ class Task(Page):
 			'senior': self.player.senior,
 			'signal': self.player.signal,
 			'lottery_odds': self.player.lottery_odds,
-			'right_side_odds': Constants.right_side_odds,
 		}
 
 	def before_next_page(self):
@@ -109,7 +100,7 @@ class Results(Page):
 
     def vars_for_template(self):
         return {
-            'investment': self.player.answer >= self.player.lottery_odds,
+            'investment': self.player.investment,
 			'good': self.player.good,
 			'lottery_win': self.player.lottery_win,
 			'win': self.player.participant.payoff > 0,

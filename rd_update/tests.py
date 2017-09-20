@@ -1,8 +1,9 @@
+import numpy as np
 
-import itertools
+name = ['Bob', 'Mike']
+senior, junior = np.random.permutation(name)
+print(senior)
+print(junior)
 
-treatments = itertools.cycle(range(2))
-dict= {}
-for p in ['a', 'b', 'c']:
-    dict[p] = next(treatments)
-print(dict)
+treatment = np.random.choice([1,2,3,4],  p=[.2,.3,.2,.3])
+print(treatment)
