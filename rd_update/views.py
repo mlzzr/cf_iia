@@ -14,7 +14,11 @@ class IRB(Page):
 
 class Instructions(Page):
 	form_model = models.Player
-	form_fields = ['truefalse1', 'truefalse2', 'truefalse3', 'truefalse4', 'multiple1', 'blank1', 'blank2', 'blank3']
+	def get_form_fields(self):
+		if self.player.high_acc != self.player.low_acc:
+			return ['truefalse1', 'truefalse2', 'truefalse3', 'truefalse4', 'multiple1', 'blank1', 'blank2', 'blank3']
+		else:
+			return ['truefalse1', 'truefalse2', 'truefalse3', 'truefalse4', 'multiple1', 'blank1', 'blank3']
 
 	def is_displayed(self):
 		return self.round_number == 1
@@ -50,7 +54,7 @@ class Instructions(Page):
 			summand += 1
 		if values["blank1"] != Constants.treatment_dict['good_prior'][self.player.treatment]:
 			summand += 1
-		if values["blank2"] != Constants.treatment_dict['high_acc'][self.player.treatment]:
+		if self.player.high_acc != self.player.low_acc and values["blank2"] != Constants.treatment_dict['high_acc'][self.player.treatment]:
 			summand += 1
 		if values["blank3"] != 100 - Constants.treatment_dict['low_acc'][self.player.treatment]:
 			summand += 1
@@ -85,6 +89,8 @@ class Task(Page):
 			'high_err': 100 - Constants.treatment_dict['high_acc'][self.player.treatment],
 			'low_acc': Constants.treatment_dict['low_acc'][self.player.treatment],
 			'low_err': 100 - Constants.treatment_dict['low_acc'][self.player.treatment],
+			'senior_prob': Constants.treatment_dict['senior_prob'][self.player.treatment],
+			'junior_prob': 100 - Constants.treatment_dict['senior_prob'][self.player.treatment],
 			'senior': self.player.senior,
 			'signal': self.player.signal,
 			'lottery_odds': self.player.lottery_odds,

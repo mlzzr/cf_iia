@@ -40,11 +40,13 @@ Task
 <br>
 
     <div id="report" style="display:none">
+        {% if high_acc != low_acc %}
         <p>
-            <b>The consultant that comes to your service is {% if senior %}{{ player.senior_name }} {% else %} {{ player.junior_name }} {% endif %}.</b>
+            The consultant that comes to your service is {% if senior %}<b>{{ player.senior_name }}</b> {% else %} <b>{{ player.junior_name }}</b> {% endif %}.
         </p>
+        {% endif %}
         <p>
-            <b>{% if senior %}{{ player.senior_name }}'s report: {% else %}{{ player.junior_name }}'s report: {% endif %}"The investment is {% if signal %}Good{% else %}Bad{% endif %}".</b>
+            {% if senior %}<b>{{ player.senior_name }}</b>'s report: {% else %}{{ player.junior_name }}'s report: {% endif %}"The investment is {% if signal %}<b>Good</b>{% else %}<b>Bad</b>{% endif %}".
         </p>
     <p><b>Please make the following comparisons.</b></p>
 

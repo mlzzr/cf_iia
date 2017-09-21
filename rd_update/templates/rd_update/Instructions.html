@@ -95,10 +95,12 @@ Instructions -- Please Read Carefully
         {% formfield player.multiple1 with label="" %}
 		<p>Among the 100 investment opportunities the experimenter picks from, how many of them are <b>good</b>?</p>
 		{% formfield player.blank1 with label='' %}
+        {% if high_acc != low_acc %}
         <p>If the investment opportunity is indeed <b>good</b>, how likely will {{ player.senior_name }} say "The investment is <b>Good</b>"?</p>
 		<div class="input-group">
             {{ form.blank2}}<span class="input-group-addon">%</span>
         </div>
+        {% endif %}
 		<p>If the investment opportunity is indeed <b>bad</b>, how likely will {{ player.junior_name }} say "The investment is <b>Good</b>"?</p>
 		<div class="input-group">
             {{ form.blank3}}<span class="input-group-addon">%</span>
