@@ -87,7 +87,9 @@ Instructions -- Please Read Carefully
         {% formfield player.truefalse1 with label="" %}
         <p>Each one of the 100 investment opportunities is equally likely to be picked by the experimenter to offer to me.</p>
         {% formfield player.truefalse2 with label="" %}
+        {% if high_acc != low_acc %}
         <p>Either {{ player.senior_name }} or {{ player.junior_name }} will report to me, but not both.</p>
+        {% endif %}
         {% formfield player.truefalse3 with label="" %}
         <p>My answers do <b>not</b> affect which comparison the computer selects to count for bonus payment.</p>
         {% formfield player.truefalse4 with label="" %}
