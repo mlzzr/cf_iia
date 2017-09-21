@@ -91,8 +91,10 @@ Instructions -- Please Read Carefully
         {% formfield player.truefalse3 with label="" %}
         <p>My answers do <b>not</b> affect which comparison the computer selects to count for bonus payment.</p>
         {% formfield player.truefalse4 with label="" %}
+        {% if high_acc != low_acc %}
         <p>Which consultant am I more likely to get?</p>
         {% formfield player.multiple1 with label="" %}
+        {% endif %}
 		<p>Among the 100 investment opportunities the experimenter picks from, how many of them are <b>good</b>?</p>
 		{% formfield player.blank1 with label='' %}
         {% if high_acc != low_acc %}

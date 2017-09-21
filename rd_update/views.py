@@ -18,7 +18,7 @@ class Instructions(Page):
 		if self.player.high_acc != self.player.low_acc:
 			return ['truefalse1', 'truefalse2', 'truefalse3', 'truefalse4', 'multiple1', 'blank1', 'blank2', 'blank3']
 		else:
-			return ['truefalse1', 'truefalse2', 'truefalse3', 'truefalse4', 'multiple1', 'blank1', 'blank3']
+			return ['truefalse1', 'truefalse2', 'truefalse3', 'truefalse4', 'blank1', 'blank3']
 
 	def is_displayed(self):
 		return self.round_number == 1
@@ -50,7 +50,7 @@ class Instructions(Page):
 			summand += 1
 		if values["truefalse4"] != True:
 			summand += 1
-		if values["multiple1"] != (self.player.senior_prob >= 0.5) - (self.player.senior_prob <= 0.5):
+		if self.player.high_acc != self.player.low_acc and values["multiple1"] != (self.player.senior_prob >= 0.5) - (self.player.senior_prob <= 0.5):
 			summand += 1
 		if values["blank1"] != Constants.treatment_dict['good_prior'][self.player.treatment]:
 			summand += 1
