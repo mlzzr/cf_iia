@@ -62,7 +62,9 @@ Instructions -- Please Read Carefully
         </tr>
         </table>
 </div>
-    <p>Then, the computer will randomly select a comparison. You answers will <b>not</b> affect which comparison the computer selects. <b>We will give you your preferred option in the selected comparison. Because every comparison is possible to be selected, you should make each comparison thoughtfully and truthfully!</b></p>
+    <p>Then, the computer will randomly select a comparison. (You answers will <b>not</b> affect which comparison the computer selects and every comparison is possible to be selected.) <b>We will give you your preferred option in the selected comparison. </b> </p>
+
+    <p>Hence, maximizing your chance of receiving the {{ Constants.high_bonus }} bonus is very simple: <b>given your information, if you think that the investment's chance of being good is higher than the pay-out chance of the right-hand side lottery in the comparison, you should click Left; otherwise you should click Right.</b></p>
 
 <p>In the end, we will tell you the quality of the investment as well as the outcome of the lottery in the selected comparison. Your bonus will be determined accordingly.</p>
 
@@ -85,30 +87,38 @@ Instructions -- Please Read Carefully
 	<h3>Comprehension questions:</h3>
         <p>Both the investment opportunity and the lottery are free.</p>
         {% formfield player.truefalse1 with label="" %}
+
         <p>Each one of the 100 investment opportunities is equally likely to be picked by the experimenter to offer to me.</p>
         {% formfield player.truefalse2 with label="" %}
+
         {% if high_acc != low_acc %}
         <p>Either {{ player.senior_name }} or {{ player.junior_name }} will report to me, but not both.</p>
-        {% endif %}
         {% formfield player.truefalse3 with label="" %}
+        {% endif %}
+
         <p>My answers do <b>not</b> affect which comparison the computer selects to count for bonus payment.</p>
         {% formfield player.truefalse4 with label="" %}
+
         {% if high_acc != low_acc %}
         <p>Which consultant am I more likely to get?</p>
         {% formfield player.multiple1 with label="" %}
         {% endif %}
+
 		<p>Among the 100 investment opportunities the experimenter picks from, how many of them are <b>good</b>?</p>
 		{% formfield player.blank1 with label='' %}
+
         {% if high_acc != low_acc %}
         <p>If the investment opportunity is indeed <b>good</b>, how likely will {{ player.senior_name }} say "The investment is <b>Good</b>"?</p>
 		<div class="input-group">
             {{ form.blank2}}<span class="input-group-addon">%</span>
         </div>
         {% endif %}
+
 		<p>If the investment opportunity is indeed <b>bad</b>, how likely will {{ player.junior_name }} say "The investment is <b>Good</b>"?</p>
 		<div class="input-group">
             {{ form.blank3}}<span class="input-group-addon">%</span>
         </div>
+
      {% next_button %}
 	</div>
 
