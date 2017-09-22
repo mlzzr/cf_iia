@@ -115,7 +115,7 @@ class Player(BasePlayer):
     posterior = models.FloatField()
     lottery_odds = models.PositiveIntegerField()
     lottery_win = models.BooleanField()
-    answer = models.PositiveIntegerField()
+    answer = models.IntegerField()
 
 
 
