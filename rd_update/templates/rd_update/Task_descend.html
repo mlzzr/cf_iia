@@ -103,17 +103,19 @@ $(document).ready(function () {
                 var clickedRadio = this;
                 var afterClickedRadio = false;
                 var clickedNumber = 100;
+
                 var radios = document.querySelectorAll('input[type=radio]');
+
                 for (i = 0; i < radios.length; ++i) {
                     var radio = radios[i];
                     if (radio == clickedRadio) {
                         afterClickedRadio = true;
                         continue;
                     }
-                    if (!afterClickedRadio  && radio.value == 'left') {
+                    if (!afterClickedRadio  && radio.value == 'right') {
                         radio.checked = true;
                     }
-                    if (afterClickedRadio && radio.value == 'right' ) {
+                    if (afterClickedRadio && radio.value == 'left' ) {
                         radio.checked = true;
                     }
                 }
@@ -126,18 +128,22 @@ $(document).ready(function () {
             }
     );
 });
+
     $('button').click(function() {
         var radios = document.querySelectorAll('input[type=radio]');
+
+
         for (i = 0; i < radios.length; ++i) {
             var radio = radios[i];
             if (radio.value == 'right' && radio.checked) {
                 $('#switchpoint').val(radio.dataset.odds - 5); {# 5 is the step size of the right hand size odds #}
-                break;
+{#                break;#}
             }
 {#            else {#}
 {#                $('#switchpoint').val(0);#}
 {#            }#}
         }
     });
+
 </script>
 {% endblock %}

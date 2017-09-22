@@ -94,7 +94,7 @@ class Task(Page):
 			'senior': self.player.senior,
 			'signal': self.player.signal,
 			'lottery_odds': self.player.lottery_odds,
-			'right_side_odds': Constants.right_side_odds[::-1],
+			'right_side_odds': Constants.right_side_odds,
 			'right_side_start': Constants.right_side_odds[0],
 		}
 
