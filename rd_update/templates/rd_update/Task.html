@@ -41,12 +41,18 @@ Task
 
     <div id="report" style="display:none">
         {% if high_acc != low_acc %}
-        <p>
+        <p style="font-size:20px">
             The consultant that comes to your service is {% if senior %}<b>{{ player.senior_name }}</b> {% else %} <b>{{ player.junior_name }}</b> {% endif %}.
         </p>
         {% endif %}
-        <p>
-            {% if senior %}<b>{{ player.senior_name }}</b>'s report: {% else %}{{ player.junior_name }}'s report: {% endif %}"The investment is {% if signal %}<b>Good</b>{% else %}<b>Bad</b>{% endif %}".
+        <p style="font-size:20px">
+            {% if senior and high_acc != low_acc %}<b>{{ player.senior_name }}</b>'s report:
+            {% elif junior and high_acc != low_acc %}<b>{{ player.junior_name }}</b>'s report:
+                {% else %}{{ player.junior_name }}'s report:
+            {% endif %}
+            "The investment is
+            {% if signal %}<b>Good</b>
+            {% else %}<b>Bad</b>{% endif %}".
         </p>
     <p><b>Please make the following comparisons.</b></p>
 
@@ -81,7 +87,7 @@ Task
 
     {{ form.errors }}
     <input type="hidden" name="answer" id="switchpoint"
-           value=0>
+           value=98>
 
     {% next_button %}
     </div>
