@@ -96,6 +96,7 @@ class Subsession(BaseSubsession):
                         p.posterior = (p.good_prior * (1 - p.low_acc)) / (p.good_prior * (1 - p.low_acc) + (1 - p.good_prior) * p.low_acc)
 
 
+
 class Group(BaseGroup):
     pass
 

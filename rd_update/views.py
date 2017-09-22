@@ -94,7 +94,8 @@ class Task(Page):
 			'senior': self.player.senior,
 			'signal': self.player.signal,
 			'lottery_odds': self.player.lottery_odds,
-			'right_side_odds': Constants.right_side_odds,
+			'right_side_odds': [i for i in Constants.right_side_odds if (2 * self.player.signal - 1) * i > (2 * self.player.signal - 1) * Constants.treatment_dict['good_prior'][self.player.treatment]],
+			'right_side_start': [i for i in Constants.right_side_odds if (2 * self.player.signal - 1) * i > (2 * self.player.signal - 1) * Constants.treatment_dict['good_prior'][self.player.treatment]][0],
 		}
 
 	def before_next_page(self):
