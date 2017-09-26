@@ -8,9 +8,8 @@
 {% block content %}
 
     <p>
-        You chose to take the {% if investment %}investment{% else %}lottery{% endif %}. The investment was {% if good %}good{% else %}bad{% endif %}. The lottery {% if lottery_win %}paid out{% else %}didn't pay out{% endif %}. Therefore, {% if win %} congratulations! You win the bonus of {{Constants.high_bonus}}.{% else %} you were unlucky and didn't win the bonus.{% endif %}
+        The investment was {% if good %}good{% else %}bad{% endif %}. The computer-generated number used in bonus calculation was {{ player.lottery_odds }}. {% if win %} Congratulations! You win the bonus of {{Constants.high_bonus}}.{% else %} You were unlucky and didn't win the bonus.{% endif %}
     </p>
-
     <p>Please click "Next" to submit the HIT and we will make all payments as soon as possible.</p>
 	<p>If you have any further questions or suggestions, please do not hesitate to contact <a href="mailto:ycliang@stanford.edu?Subject=MTurk%20Study" target="_top">me</a>. Please do contact me with any negative or positive feedback and in particular with any difficulties or bugs you encountered.</p>
 

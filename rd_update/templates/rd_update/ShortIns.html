@@ -5,7 +5,7 @@
 <p>Before you decide whether to take the investment opportunity, we will also assign a consultant to help you inspect its quality. After the inspection, the consultant will report to you whether he thinks the investment is good or bad.
     {% if high_acc == low_acc %} The consultant, who's name is {{ player.junior_name }}, sometimes makes mistakes.
     {% else %}
-        The consultant will either be {{ player.senior_name }} or {{ player.junior_name }}. Both {{ player.senior_name }} and {{ player.junior_name }} sometimes make mistakes.
+        <b>The consultant will either be {{ player.senior_name }} or {{ player.junior_name }}.</b> Both {{ player.senior_name }} and {{ player.junior_name }} sometimes make mistakes.
     {% endif %}
     The list below enumerates how a consultant will report under each scenario.</p>
 
@@ -29,10 +29,9 @@
       </li>
     </ul>
 <p>
-{% if high_acc != low_acc %}
-{% if senior_prob == 50 %} <b>The consultant that will be at your service is equally likely to be either {{ player.senior_name }} or {{ player.junior_name }}.</b>
-            {% elif senior_prob > 50 %} <b>The consultant that will be at your service is most likely to be {{ player.senior_name }} ({{ senior_prob }}% chance), but with a small chance it will be {{ player.junior_name }} instead.</b>
-            {% else %} <b>With a small chance ({{ senior_prob }}%), the consultant that will be at your service is going to be {{ player.senior_name }}. But most likely it will be {{ player.junior_name }} instead.</b>
+{% if expectation != 0 and high_acc != low_acc %}
+{% if senior_prob > 50 %} <b>The consultant that will be at your service is most likely to be {{ player.senior_name }}, but with a small chance it will be {{ player.junior_name }} instead.</b>
+{% elif senior_prob < 50 %} <b>The consultant that will be at your service is most likely to be {{ player.junior_name }}, but with a small chance it will be {{ player.senior_name }} instead.</b>
 {% endif %}
 {% endif %}
 </p>
