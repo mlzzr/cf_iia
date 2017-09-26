@@ -26,8 +26,8 @@ class Constants(BaseConstants):
     treatment_dict = {
         'senior_prob': [50, 1, 99, 49, 99],
         'good_prior': [40, 40, 40, 40, 40],
-        'high_acc': [75, 90, 75, 75, 75],
-        'low_acc': [75, 75, 60, 60, 60],
+        'high_acc': [70, 90, 75, 75, 75],
+        'low_acc': [70, 75, 60, 60, 60],
         'expectation': [0, 0, 0, -1, 1], ## frame subjects' expectation of 75% happening
     }
     num_treatments = len(treatment_dict['senior_prob'])
