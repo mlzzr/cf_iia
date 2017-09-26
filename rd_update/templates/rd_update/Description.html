@@ -3,7 +3,7 @@
 <p>Before we ask you to evaluate the investment again, we will assign a consultant to help you inspect its quality. After the inspection, the consultant will report to you whether he thinks the investment is good or bad.
     {% if high_acc == low_acc %} The consultant, who's name is {{ player.junior_name }}, sometimes makes mistakes.
     {% else %}
-        The consultant will either be {{ player.senior_name }} or {{ player.junior_name }}. Both {{ player.senior_name }} and {{ player.junior_name }} sometimes make mistakes.
+        <b>The consultant will either be {{ player.senior_name }} or {{ player.junior_name }}.</b> Both {{ player.senior_name }} and {{ player.junior_name }} sometimes make mistakes.
     {% endif %}
     The list below enumerates how a consultant will report under each scenario.</p>
 
