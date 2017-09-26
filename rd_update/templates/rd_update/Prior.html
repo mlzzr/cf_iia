@@ -1,0 +1,57 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+
+{% block title %}
+Instructions -- Please Read Carefully
+{% endblock %}
+
+{% block content %}
+
+<div class="box1">
+	<p> <b>You will be asked to answer questions about these instructions and you will not be able to proceed unless you answer all questions correctly! </b> </p>
+
+	  <p> <b> If you do not fully understand the instructions, we cannot use your data in our study. Please <a href="mailto:ycliang@stanford.edu?Subject=MTurk%20Study" target="_top">email me</a> if you feel you understood everything but the tests do not let you pass. </b> </p>
+</div>
+
+
+	<h3>Overview:</h3>
+
+<p>
+	<b>In this task, you will be asked to evaluate an "investment".</b> Your bonus will either be <b>{{Constants.high_bonus}}</b> or <b>{{ Constants.low_bonus }}</b>, depending on your evaluation and some luck. The study ends with a very short survey that you also need to complete to be paid any bonus payments.
+</p>
+
+	<h3>Task description:</h3>
+
+    <p>There are 100 investment opportunities. <b>Out of the 100 investments there are {{prior_g}} good ones.</b>  We <b>randomly</b> pick one investment opportunity for you to evaluate. (Each one of the 100 investments is equally likely to be picked.)
+
+    <p><b>Question:</b> How likely do you think that the investment we pick for you is <b>good</b>? (This is an attention check and does <b>not</b> affect your bonus.)</p>
+    <div class="input-group">
+            {{ form.prior }}<span class="input-group-addon">%</span>
+    </div>
+
+     {% next_button %}
+
+{% endblock %}
+
+
+{% block styles %}
+ <style type="text/css">
+ div.box1 {
+    padding: 10px;
+    border: 3px solid red;
+    margin: 0;
+}
+ div.box2 {
+    padding: 10px;
+    border: 1px solid #eee;
+    margin: 0;
+}
+
+ </style>
+
+    <style media="screen">
+      .input-group {
+        max-width: 100px;
+      }
+    </style>
+{% endblock %}

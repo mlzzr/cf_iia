@@ -1,0 +1,37 @@
+
+
+<p>Before we ask you to evaluate the investment again, we will assign a consultant to help you inspect its quality. After the inspection, the consultant will report to you whether he thinks the investment is good or bad.
+    {% if high_acc == low_acc %} The consultant, who's name is {{ player.junior_name }}, sometimes makes mistakes.
+    {% else %}
+        The consultant will either be {{ player.senior_name }} or {{ player.junior_name }}. Both {{ player.senior_name }} and {{ player.junior_name }} sometimes make mistakes.
+    {% endif %}
+    The list below enumerates how a consultant will report under each scenario.</p>
+
+    <p>If the investment is indeed <b>good</b> (which happens {{prior_g}} out of 100 times), then</p>
+    <ul>
+      {% if high_acc != low_acc %}
+      <li>{{ player.senior_name }} will report {{Constants.good_message}} {{high_acc}}% of the times, but will mistakenly report {{Constants.bad_message}} {{high_err}}% of the times;
+      </li>
+      {% endif %}
+      <li>{{ player.junior_name }} will report {{Constants.good_message}} {{low_acc}}% of the times, but will mistakenly report {{Constants.bad_message}} {{low_err}}% of the times.
+      </li>
+    </ul>
+
+    <p>If the investment is indeed <b>bad</b> (which happens {{prior_b}} out of 100 times), then</p>
+    <ul>
+      {% if high_acc != low_acc %}
+      <li>{{ player.senior_name }} will report {{Constants.bad_message}} {{high_acc}}% of the times, but will mistakenly report {{Constants.good_message}} {{high_err}}% of the times;
+      </li>
+      {% endif %}
+      <li>{{ player.junior_name }} will report {{Constants.bad_message}} {{low_acc}}% of the times, but will mistakenly report {{Constants.good_message}} {{low_err}}% of the times.
+      </li>
+    </ul>
+<p>
+{% if expectation == 1 %}  <b>The consultant that will be at your service is most likely to be {{ player.senior_name }}, but with a small chance it will be {{ player.junior_name }} instead.</b>
+{% elif expectation == -1 %} <b>The consultant that will be at your service is most likely to be {{ player.junior_name }}, but with a small chance it will be {{ player.senior_name }} instead.</b>
+{% endif %}
+</p>
+
+<p>After the consultant makes his report, you will be asked again how likely you think the investment is good. This time, you evaluation will affect your bonus. You will receive either <b>{{ Constants.high_bonus }}</b> or <b>{{ Constants.low_bonus }}</b> as bonus and our payment rule makes sure that <b>you are most likely to get {{ Constants.high_bonus }} when you give us your best guess</b>. Think carefully and then type in the number that truly reflects your assessment. You should not rush the questions or randomly answer something, as this will increase your chance of missing the bonus! </p>
+
+

@@ -13,9 +13,17 @@ Instructions -- Please Read Carefully
 	  <p> <b> If you do not fully understand the instructions, we cannot use your data in our study. Please <a href="mailto:ycliang@stanford.edu?Subject=MTurk%20Study" target="_top">email me</a> if you feel you understood everything but the tests do not let you pass. </b> </p>
 </div>
 
-<h3>Task description:</h3>
-{% include "rd_update/Description.html"%}
-{% include "rd_update/PaymentRule.html"%}
+
+	<h3>Overview:</h3>
+
+<p>
+	<b>This task asks you to choose between an investment and a lottery.</b> You will receive the bonus of <b>{{Constants.high_bonus}}</b> if your choice pays out and <b>no bonus</b> otherwise. The study ends with a very short survey that you also need to complete to be paid any bonus payments.
+</p>
+
+
+{% include "rd_update/ShortIns.html"%}
+
+<p>After the consultant makes his report, you will have to make a decision. <b>You can either take the investment opportunity, or you can take a lottery that gives you the bonus of {{Constants.high_bonus}} with a certain chance and no bonus otherwise.</b> After you make your decision, we will reveal the quality of the investment as well as the result of the lottery and you will be paid accordingly.</p>
 
 <p>Before you proceed, we need to ask you some comprehension questions to make sure that you understand the task. Click the button below to go to the comprehension questions.</p>
 
@@ -28,36 +36,24 @@ Instructions -- Please Read Carefully
         </button>
 
     </div>
-</div>
+
     <br>
 
     <div id="understanding" style="visibility:hidden">
 	<h3>Comprehension questions:</h3>
-        {% if high_acc != low_acc %}
-        <p>Either {{ player.senior_name }} or {{ player.junior_name }} will report to me, but not both.</p>
-        {% formfield player.truefalse3 with label="" %}
-        {% endif %}
-
-        <p>I'm most likely to win {{ Constants.high_bonus }} when I report my best guess.</p>
-        {% formfield player.truefalse5 with label="" %}
-
-        {% if expectation != 0 %}
-        <p>Which consultant am I more likely to get?</p>
-        {% formfield player.multiple1 with label="" %}
-        {% endif %}
-
-        {% if high_acc != low_acc %}
-        <p>If the investment opportunity is indeed <b>good</b>, how likely will {{ player.senior_name }} say "The investment is <b>Good</b>"?</p>
+        {% formfield player.truefalse1 %}
+        {% formfield player.truefalse2 %}
+        {% formfield player.truefalse3 %}
+		<p><b>Among the 100 investment opportunities the experimenter picks from, how many of them are good?</b></p>
+		{% formfield player.blank1 with label='' %}
+		<p><b>If the investment opportunity is indeed good, how likely will Bob say "The investment is Good"?</b></p>
 		<div class="input-group">
             {{ form.blank2}}<span class="input-group-addon">%</span>
         </div>
-        {% endif %}
-
-		<p>If the investment opportunity is indeed <b>bad</b>, how likely will {{ player.junior_name }} say "The investment is <b>Good</b>"?</p>
+		<p><b>If the investment opportunity is indeed bad, how likely will Mike say "The investment is Good"?</b></p>
 		<div class="input-group">
             {{ form.blank3}}<span class="input-group-addon">%</span>
         </div>
-
      {% next_button %}
 	</div>
 
@@ -72,11 +68,11 @@ Instructions -- Please Read Carefully
     border: 3px solid red;
     margin: 0;
 }
- div.box2 {
+	 img.box2 {
     padding: 10px;
     border: 1px solid #eee;
     margin: 0;
-}
+	 }
 	.tg  {border-collapse:collapse;border-spacing:0;}
 	.tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}
 	.tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}

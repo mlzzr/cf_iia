@@ -20,7 +20,6 @@ class Constants(BaseConstants):
     # Basics
     name_in_url = 'yliangStanfordUpdateExperiment5'
     players_per_group = None
-    update_prob = 0.8  # prob that cf_update is chosen for payment
     failuretolerance = 7  # for understanding questions
 
     # Treatments
