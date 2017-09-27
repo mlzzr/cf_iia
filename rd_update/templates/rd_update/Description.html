@@ -10,20 +10,20 @@
     <p>If the investment is indeed <b>good</b> (which happens {{prior_g}} out of 100 times), then</p>
     <ul>
       {% if high_acc != low_acc %}
-      <li>{{ player.senior_name }} will report {{Constants.good_message}} {{high_acc}}% of the times, but will mistakenly report {{Constants.bad_message}} {{high_err}}% of the times;
+      <li>{{ player.senior_name }} will report {{Constants.good_message}} <b>{{high_acc}}%</b> of the times, but will mistakenly report {{Constants.bad_message}} <b>{{high_err}}%</b> of the times;
       </li>
       {% endif %}
-      <li>{{ player.junior_name }} will report {{Constants.good_message}} {{low_acc}}% of the times, but will mistakenly report {{Constants.bad_message}} {{low_err}}% of the times.
+      <li>{{ player.junior_name }} will report {{Constants.good_message}} <b>{{low_acc}}%</b> of the times, but will mistakenly report {{Constants.bad_message}} <b>{{low_err}}%</b> of the times.
       </li>
     </ul>
 
     <p>If the investment is indeed <b>bad</b> (which happens {{prior_b}} out of 100 times), then</p>
     <ul>
       {% if high_acc != low_acc %}
-      <li>{{ player.senior_name }} will report {{Constants.bad_message}} {{high_acc}}% of the times, but will mistakenly report {{Constants.good_message}} {{high_err}}% of the times;
+      <li>{{ player.senior_name }} will report {{Constants.bad_message}} <b>{{high_acc}}%</b> of the times, but will mistakenly report {{Constants.good_message}} <b>{{high_err}}%</b> of the times;
       </li>
       {% endif %}
-      <li>{{ player.junior_name }} will report {{Constants.bad_message}} {{low_acc}}% of the times, but will mistakenly report {{Constants.good_message}} {{low_err}}% of the times.
+      <li>{{ player.junior_name }} will report {{Constants.bad_message}} <b>{{low_acc}}%</b> of the times, but will mistakenly report {{Constants.good_message}} <b>{{low_err}}%</b> of the times.
       </li>
     </ul>
 <p>
