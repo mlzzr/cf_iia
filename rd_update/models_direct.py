@@ -20,19 +20,20 @@ class Constants(BaseConstants):
     # Basics
     name_in_url = 'yliangStanfordUpdateExperiment5'
     players_per_group = None
-    failuretolerance = 8  # for understanding questions
+    failuretolerance = 5  # for understanding questions
 
     # Treatments
     treatment_dict = {
-        'senior_prob': [50, 50, 50, 20, 90],
+        'senior_prob': [50, 1, 99, 49, 99],
         'good_prior': [40, 40, 40, 40, 40],
         'high_acc': [75, 90, 75, 75, 75],
         'low_acc': [75, 75, 60, 60, 60],
+        'expectation': [0, 0, 0, -1, 1], ## frame subjects' expectation of 75% happening
     }
     num_treatments = len(treatment_dict['senior_prob'])
     num_rounds = 1
     session_treatments = [1, 1, 1, 0, 0]
-    sample_sizes = [50, 100, 100, 250, 60]
+    sample_sizes = [50, 50, 50, 100, 50]
     treatment_prob = [a*b for a, b in zip(session_treatments, sample_sizes)] / np.dot(session_treatments, sample_sizes)
 
     # BDM
@@ -94,6 +95,7 @@ class Subsession(BaseSubsession):
                         p.posterior = (p.good_prior * p.low_acc) / (p.good_prior * p.low_acc + (1 - p.good_prior) * (1 - p.low_acc))
                     else:
                         p.posterior = (p.good_prior * (1 - p.low_acc)) / (p.good_prior * (1 - p.low_acc) + (1 - p.good_prior) * p.low_acc)
+                p.expectation = Constants.treatment_dict['expectation'][p.treatment]
 
 
 class Group(BaseGroup):
@@ -115,19 +117,16 @@ class Player(BasePlayer):
     posterior = models.FloatField()
     lottery_odds = models.PositiveIntegerField()
     lottery_win = models.BooleanField()
-    answer = models.IntegerField()
-
-
+    answer = models.IntegerField(min=0, max=100)
+    prior = models.IntegerField(min=0, max=100)
+    expectation = models.IntegerField()
 
 
     ## Understanding Questions
     failures = models.PositiveIntegerField()
-    truefalse1 = models.BooleanField(choices=[[1, 'True'], [0, 'False']], widget=widgets.RadioSelect())
-    truefalse2 = models.BooleanField(choices=[[1, 'True'], [0, 'False']], widget=widgets.RadioSelect())
     truefalse3 = models.BooleanField(choices=[[1, 'True'], [0, 'False']], widget=widgets.RadioSelect())
-    truefalse4 = models.BooleanField(choices=[[1, 'True'], [0, 'False']], widget=widgets.RadioSelect())
+    truefalse5 = models.BooleanField(choices=[[1, 'True'], [0, 'False']], widget=widgets.RadioSelect())
     multiple1 = models.IntegerField(widget=widgets.RadioSelect())
-    blank1 = models.PositiveIntegerField()
     blank2 = models.PositiveIntegerField()
     blank3 = models.PositiveIntegerField()
 

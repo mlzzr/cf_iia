@@ -1,0 +1,90 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+
+{% block title %}
+Instructions -- Please Read Carefully
+{% endblock %}
+
+{% block content %}
+
+<div class="box1">
+	<p> <b>You will be asked to answer questions about these instructions and you will not be able to proceed unless you answer all questions correctly! </b> </p>
+
+	  <p> <b> If you do not fully understand the instructions, we cannot use your data in our study. Please <a href="mailto:ycliang@stanford.edu?Subject=MTurk%20Study" target="_top">email me</a> if you feel you understood everything but the tests do not let you pass. </b> </p>
+</div>
+
+<h3>Task description:</h3>
+{% include "rd_update/Description.html"%}
+{% include "rd_update/PaymentRule.html"%}
+
+<p>Before you proceed, we need to ask you some comprehension questions to make sure that you understand the task. Click the button below to go to the comprehension questions.</p>
+
+    <div  id="hide">
+        <button type="button" class="btn btn-primary btn-large" onclick="
+        document.getElementById('understanding').style.visibility='visible';
+        document.getElementById('hide').style.display = 'none'"
+        >
+            Go to comprehension questions
+        </button>
+
+    </div>
+</div>
+    <br>
+
+    <div id="understanding" style="visibility:hidden">
+	<h3>Comprehension questions:</h3>
+        {% if high_acc != low_acc %}
+        <p>Either {{ player.senior_name }} or {{ player.junior_name }} will report to me, but not both.</p>
+        {% formfield player.truefalse3 with label="" %}
+        {% endif %}
+
+        <p>I'm most likely to win {{ Constants.high_bonus }} when I report my best guess.</p>
+        {% formfield player.truefalse5 with label="" %}
+
+        {% if expectation != 0 %}
+        <p>Which consultant am I more likely to get?</p>
+        {% formfield player.multiple1 with label="" %}
+        {% endif %}
+
+        {% if high_acc != low_acc %}
+        <p>If the investment opportunity is indeed <b>good</b>, how likely will {{ player.senior_name }} say "The investment is <b>Good</b>"?</p>
+		<div class="input-group">
+            {{ form.blank2}}<span class="input-group-addon">%</span>
+        </div>
+        {% endif %}
+
+		<p>If the investment opportunity is indeed <b>bad</b>, how likely will {{ player.junior_name }} say "The investment is <b>Good</b>"?</p>
+		<div class="input-group">
+            {{ form.blank3}}<span class="input-group-addon">%</span>
+        </div>
+
+     {% next_button %}
+	</div>
+
+
+{% endblock %}
+
+
+{% block styles %}
+ <style type="text/css">
+ div.box1 {
+    padding: 10px;
+    border: 3px solid red;
+    margin: 0;
+}
+ div.box2 {
+    padding: 10px;
+    border: 1px solid #eee;
+    margin: 0;
+}
+	.tg  {border-collapse:collapse;border-spacing:0;}
+	.tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}
+	.tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}
+	.tg .tg-s6z2{text-align:center}
+	.tg .tg-baqh{text-align:center;vertical-align:top}
+	.tg .tg-yw4l{vertical-align:top}
+      .input-group {
+        max-width: 100px;
+      }
+ </style>
+{% endblock %}
