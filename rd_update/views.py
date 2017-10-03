@@ -12,8 +12,10 @@ class IRB(Page):
 	def is_displayed(self):
 		return self.round_number == 1
 
+
 class Instructions(Page):
 	form_model = models.Player
+
 	def get_form_fields(self):
 		if self.player.expectation != 0:
 			return ['truefalse1', 'truefalse2', 'truefalse3', 'truefalse4', 'multiple1', 'blank1', 'blank2', 'blank3']
@@ -24,7 +26,7 @@ class Instructions(Page):
 
 	def is_displayed(self):
 		return self.round_number == 1
-	
+
 	def vars_for_template(self):
 		return {
 			'prior_g': Constants.treatment_dict['good_prior'][self.player.treatment],
@@ -37,8 +39,9 @@ class Instructions(Page):
 			'junior_prob': 100 - Constants.treatment_dict['senior_prob'][self.player.treatment],
 			'expectation': self.player.expectation,
 		}
+
 	def multiple1_choices(self):
-		return [[1, self.player.senior_name], [-1, self.player.junior_name] ]
+		return [[1, self.player.senior_name], [-1, self.player.junior_name]]
 
 	def error_message(self, values):
 		if self.player.participant.vars.get('failure') == 0:
@@ -67,9 +70,8 @@ class Instructions(Page):
 			return 'Sorry, you got ' + str(summand) + " questions wrong."
 		elif summand == 1 and self.player.participant.vars.get('failure') < Constants.failuretolerance:
 			self.player.participant.vars['failure'] = 1 + self.player.participant.vars.get('failure')
-			self.player.failures = self.player.failures  + 1
+			self.player.failures = self.player.failures + 1
 			return 'Almost there! You just got one question wrong!'
-
 
 class sorrybutton2(Page):
 	form_model = models.Player
@@ -97,7 +99,7 @@ class Task(Page):
 			'senior': self.player.senior,
 			'signal': self.player.signal,
 			'lottery_odds': self.player.lottery_odds,
-			'right_side_odds': Constants.right_side_odds[::-1],
+			'right_side_odds': Constants.right_side_odds,
 			'right_side_start': Constants.right_side_odds[0],
 			'expectation': self.player.expectation,
 		}

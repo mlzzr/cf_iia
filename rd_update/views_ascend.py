@@ -15,8 +15,10 @@ class IRB(Page):
 class Instructions(Page):
 	form_model = models.Player
 	def get_form_fields(self):
-		if self.player.high_acc != self.player.low_acc:
+		if self.player.expectation != 0:
 			return ['truefalse1', 'truefalse2', 'truefalse3', 'truefalse4', 'multiple1', 'blank1', 'blank2', 'blank3']
+		elif self.player.high_acc != self.player.low_acc:
+			return ['truefalse1', 'truefalse2', 'truefalse3', 'truefalse4', 'blank1', 'blank2', 'blank3']
 		else:
 			return ['truefalse1', 'truefalse2', 'truefalse4', 'blank1', 'blank3']
 
@@ -33,9 +35,10 @@ class Instructions(Page):
 			'low_err': 100 - Constants.treatment_dict['low_acc'][self.player.treatment],
 			'senior_prob': Constants.treatment_dict['senior_prob'][self.player.treatment],
 			'junior_prob': 100 - Constants.treatment_dict['senior_prob'][self.player.treatment],
+			'expectation': self.player.expectation,
 		}
 	def multiple1_choices(self):
-		return [[1, self.player.senior_name], [-1, self.player.junior_name], [0, "I'm equally likely to get each of the two."] ]
+		return [[1, self.player.senior_name], [-1, self.player.junior_name] ]
 
 	def error_message(self, values):
 		if self.player.participant.vars.get('failure') == 0:
@@ -50,7 +53,7 @@ class Instructions(Page):
 			summand += 1
 		if values["truefalse4"] != True:
 			summand += 1
-		if self.player.high_acc != self.player.low_acc and values["multiple1"] != (self.player.senior_prob >= 0.5) - (self.player.senior_prob <= 0.5):
+		if self.player.expectation != 0 and values["multiple1"] != self.player.expectation:
 			summand += 1
 		if values["blank1"] != Constants.treatment_dict['good_prior'][self.player.treatment]:
 			summand += 1
@@ -94,8 +97,9 @@ class Task(Page):
 			'senior': self.player.senior,
 			'signal': self.player.signal,
 			'lottery_odds': self.player.lottery_odds,
-			'right_side_odds': Constants.right_side_odds,
+			'right_side_odds': Constants.right_side_odds[::-1],
 			'right_side_start': Constants.right_side_odds[0],
+			'expectation': self.player.expectation,
 		}
 
 	def before_next_page(self):
