@@ -1,0 +1,151 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+
+{% block title %}
+Instructions -- Please Read Carefully
+{% endblock %}
+
+{% block content %}
+
+<div class="box1">
+	<p> <b>You will be asked to answer questions about these instructions and you will not be able to proceed unless you answer all questions correctly! </b> </p>
+
+	  <p> <b> If you do not fully understand the instructions, we cannot use your data in our study. Please <a href="mailto:ycliang@stanford.edu?Subject=MTurk%20Study" target="_top">email me</a> if you feel you understood everything but the tests do not let you pass. </b> </p>
+</div>
+
+
+	<h3>Overview:</h3>
+
+<p>
+	<b>In this task, you will be asked to make several choices between an "investment" or a lottery.</b> You will receive the bonus of <b>{{Constants.high_bonus}}</b> if a randomly selected choice of yours pays out and <b>no bonus</b> otherwise. The study ends with a very short survey that you also need to complete to be paid any bonus payments.
+</p>
+
+
+{% include "rd_update/ShortIns.html"%}
+
+<!--<p>After the consultant makes his report, you will have to make a decision. <b>You can either take the investment opportunity, or you can take a lottery that gives you the bonus of {{Constants.high_bonus}} with a certain chance and no bonus otherwise.</b> After you make your decision, we will reveal the quality of the investment as well as the result of the lottery and you will be paid accordingly.</p>-->
+
+    <p>After the consultant makes his report, you will be asked to make several comparisons. In each comparison, you will answer whether you prefer to take the investment opportunity or a lottery that pays out <b>{{Constants.high_bonus}}</b> with a certain chance and <b>{{ Constants.low_bonus }}</b> otherwise. (Both the investment opportunity and the lottery are free.)</p>
+<div class="box2">
+        <table class="table table-striped">
+        <colgroup>
+            <col width="25%">
+            <col width="10%">
+            <col width="65%">
+        </colgroup>
+        <tr>
+            <td align="right"><b>Option A</b></td>
+            <td></td>
+            <td align="left"><b>Option B</b></td>
+        </tr>
+        <tr>
+                <td align="right">
+                    I prefer taking the investment.</b> </td>
+                <td align="middle">
+                    <input type="radio" disabled>&nbsp;&nbsp;
+                    <input type="radio" disabled>
+                </td>
+                <td align="left">
+                    I prefer taking a lottery that pays out <b>{{Constants.high_bonus}}</b> with <b>X%</b> chance and <b>{{ Constants.low_bonus }}</b> otherwise.
+                </td>
+        </tr>
+        <tr>
+                <td align="right">
+                    I prefer taking the investment.</b> </td>
+                <td align="middle">
+                    <input type="radio" disabled>&nbsp;&nbsp;
+                    <input type="radio" disabled>
+                </td>
+                <td align="left">
+                    I prefer taking a lottery that pays out <b>{{Constants.high_bonus}}</b> with <b>Y%</b> chance and <b>{{ Constants.low_bonus }}</b> otherwise.
+                </td>
+        </tr>
+        </table>
+</div>
+    <p>Then, the computer will randomly select a comparison. (You answers will <b>not</b> affect which comparison the computer selects and every comparison is possible to be selected.) <b>We will give you your preferred option in the selected comparison. </b> </p>
+
+    <p>Hence, maximizing your chance of receiving the {{ Constants.high_bonus }} bonus is very simple: <b>given your information, if you think that the investment's chance of being good is higher than the pay-out chance of the right-hand side lottery in the comparison, you should click Left; otherwise you should click Right.</b></p>
+
+<p>In the end, we will tell you the quality of the investment as well as the outcome of the lottery in the selected comparison. Your bonus will be determined accordingly.</p>
+
+
+<p>Before you proceed, we need to ask you some comprehension questions to make sure that you understand the task. Click the button below to go to the comprehension questions.</p>
+
+    <div  id="hide">
+        <button type="button" class="btn btn-primary btn-large" onclick="
+        document.getElementById('understanding').style.visibility='visible';
+        document.getElementById('hide').style.display = 'none'"
+        >
+            Go to comprehension questions
+        </button>
+
+    </div>
+
+    <br>
+
+    <div id="understanding" style="visibility:hidden">
+	<h3>Comprehension questions:</h3>
+        <p>Both the investment opportunity and the lottery are free.</p>
+        {% formfield player.truefalse1 with label="" %}
+
+        <p>Each one of the 100 investment opportunities is equally likely to be picked by the experimenter to offer to me.</p>
+        {% formfield player.truefalse2 with label="" %}
+
+        {% if high_acc != low_acc %}
+        <p>Either {{ player.senior_name }} or {{ player.junior_name }} will report to me, but not both.</p>
+        {% formfield player.truefalse3 with label="" %}
+        {% endif %}
+
+        <p>My answers do <b>not</b> affect which comparison the computer selects to count for bonus payment.</p>
+        {% formfield player.truefalse4 with label="" %}
+
+        {% if expectation != 0 %}
+        <p>Which consultant am I more likely to get?</p>
+        {% formfield player.multiple1 with label="" %}
+        {% endif %}
+
+		<p>Among the 100 investment opportunities the experimenter picks from, how many of them are <b>good</b>?</p>
+		{% formfield player.blank1 with label='' %}
+
+        {% if high_acc != low_acc %}
+        <p>If the investment opportunity is indeed <b>good</b>, how likely will {{ player.senior_name }} say "The investment is <b>Good</b>"?</p>
+		<div class="input-group">
+            {{ form.blank2}}<span class="input-group-addon">%</span>
+        </div>
+        {% endif %}
+
+		<p>If the investment opportunity is indeed <b>bad</b>, how likely will {{ player.junior_name }} say "The investment is <b>Good</b>"?</p>
+		<div class="input-group">
+            {{ form.blank3}}<span class="input-group-addon">%</span>
+        </div>
+
+     {% next_button %}
+	</div>
+
+
+{% endblock %}
+
+
+{% block styles %}
+ <style type="text/css">
+ div.box1 {
+    padding: 10px;
+    border: 3px solid red;
+    margin: 0;
+}
+ div.box2 {
+    padding: 10px;
+    border: 1px solid #eee;
+    margin: 0;
+}
+	.tg  {border-collapse:collapse;border-spacing:0;}
+	.tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}
+	.tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}
+	.tg .tg-s6z2{text-align:center}
+	.tg .tg-baqh{text-align:center;vertical-align:top}
+	.tg .tg-yw4l{vertical-align:top}
+      .input-group {
+        max-width: 100px;
+      }
+ </style>
+{% endblock %}

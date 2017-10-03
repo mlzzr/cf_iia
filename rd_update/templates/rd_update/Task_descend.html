@@ -1,0 +1,149 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+
+
+{% block title %}
+Task
+{% endblock %}
+
+{% block content %}
+<div class="panel-group" id="accordion">
+    <div class="panel panel-warning" id="panel1">
+        <div class="panel-heading">
+             <h4 class="panel-title">
+        <a data-toggle="collapse" data-target="#collapseOne" class="btn-block" href="#collapseOne">
+            Task description -- Click to collapse
+        </a>
+      </h4>
+
+        </div>
+        <div id="collapseOne" class="panel-collapse collapse in" data-toggle="false">
+            <div class="panel-body">
+
+{% include "rd_update/ShortIns.html"%}
+            </div>
+        </div>
+    </div>
+</div>
+
+
+    <div  id="hide">
+        <button type="button" class="btn btn-primary btn-large" onclick="
+        document.getElementById('report').style.display='block';
+        document.getElementById('hide').style.display = 'none'"
+        >
+            Request a consultant and read his report
+        </button>
+
+    </div>
+
+<br>
+
+    <div id="report" style="display:none">
+        {% if high_acc != low_acc %}
+        <p style="font-size:20px">
+            The consultant that comes to your service is {% if senior %}<b>{{ player.senior_name }}</b> {% else %} <b>{{ player.junior_name }}</b> {% endif %}.
+        </p>
+        {% endif %}
+        <p style="font-size:20px">
+            {% if senior and high_acc != low_acc %}<b>{{ player.senior_name }}</b>'s report:
+            {% elif junior and high_acc != low_acc %}<b>{{ player.junior_name }}</b>'s report:
+                {% else %}{{ player.junior_name }}'s report:
+            {% endif %}
+            "The investment is
+            {% if signal %}<b>Good</b>
+            {% else %}<b>Bad</b>{% endif %}".
+        </p>
+    <p><b>Please make the following comparisons.</b></p>
+
+
+    <table class="table table-striped">
+        <colgroup>
+            <col width="25%">
+            <col width="10%">
+            <col width="65%">
+        </colgroup>
+        <tr>
+            <td align="right"><b>Option A</b></td>
+            <td></td>
+            <td align="left"><b>Option B</b></td>
+        </tr>
+        {% for odds in right_side_odds %}
+            <tr>
+                <td align="right">
+                    I prefer taking the investment. </td>
+                <td align="middle">
+                    <input type="radio" name="odds_{{ odds|json }}" value="left"
+                           required>&nbsp;&nbsp;
+                    <input type="radio" name="odds_{{ odds|json }}"
+                           value="right" data-odds="{{ odds|json }}" required>
+                </td>
+                <td align="left">
+                    I prefer taking a lottery that pays out {{Constants.high_bonus}} with <b>{{ odds }}%</b> chance and {{ Constants.low_bonus }} otherwise.  </td>
+            </tr>
+        {% endfor %}
+    </table>
+
+
+    {{ form.errors }}
+    <input type="hidden" name="answer" id="switchpoint"
+           value={{ right_side_start }}>
+
+    {% next_button %}
+    </div>
+
+{% endblock %}
+
+
+{% block scripts %}
+<script>
+$(document).ready(function () {
+    $('input[type=radio]').change(
+            function () {
+                var clickedRadio = this;
+                var afterClickedRadio = false;
+                var clickedNumber = 100;
+
+                var radios = document.querySelectorAll('input[type=radio]');
+
+                for (i = 0; i < radios.length; ++i) {
+                    var radio = radios[i];
+                    if (radio == clickedRadio) {
+                        afterClickedRadio = true;
+                        continue;
+                    }
+                    if (!afterClickedRadio  && radio.value == 'right') {
+                        radio.checked = true;
+                    }
+                    if (afterClickedRadio && radio.value == 'left' ) {
+                        radio.checked = true;
+                    }
+                }
+                for (i = 0; i < radios.length; ++i) {
+                    var radio = radios[i];
+                    if (radio == clickedRadio) {
+                        radio.checked = true;
+                    }
+                }
+            }
+    );
+});
+
+    $('button').click(function() {
+        var radios = document.querySelectorAll('input[type=radio]');
+
+
+        for (i = 0; i < radios.length; ++i) {
+            var radio = radios[i];
+            if (radio.value == 'right' && radio.checked) {
+                $('#switchpoint').val(radio.dataset.odds - 5); {# 5 is the step size of the right hand size odds #}
+{#                break;#}
+            }
+{#            else {#}
+{#                $('#switchpoint').val(0);#}
+{#            }#}
+        }
+    });
+
+</script>
+{% endblock %}

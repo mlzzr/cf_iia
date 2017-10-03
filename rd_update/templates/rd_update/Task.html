@@ -19,14 +19,14 @@ Task
         </div>
         <div id="collapseOne" class="panel-collapse collapse in" data-toggle="false">
             <div class="panel-body">
-
-{% include "rd_update/ShortIns.html"%}
+<h3>Task description:</h3>
+{% include "rd_update/Description.html"%}
             </div>
         </div>
     </div>
 </div>
 
-
+    <p>Recall that in your first evaluation, you said there was a <b>{{ player.prior }}%</b> chance that the investment was <b>good</b>.</p>
     <div  id="hide">
         <button type="button" class="btn btn-primary btn-large" onclick="
         document.getElementById('report').style.display='block';
@@ -54,40 +54,10 @@ Task
             {% if signal %}<b>Good</b>
             {% else %}<b>Bad</b>{% endif %}".
         </p>
-    <p><b>Please make the following comparisons.</b></p>
-
-
-    <table class="table table-striped">
-        <colgroup>
-            <col width="25%">
-            <col width="10%">
-            <col width="65%">
-        </colgroup>
-        <tr>
-            <td align="right"><b>Option A</b></td>
-            <td></td>
-            <td align="left"><b>Option B</b></td>
-        </tr>
-        {% for odds in right_side_odds %}
-            <tr>
-                <td align="right">
-                    I prefer taking the investment. </td>
-                <td align="middle">
-                    <input type="radio" name="odds_{{ odds|json }}" value="left"
-                           required>&nbsp;&nbsp;
-                    <input type="radio" name="odds_{{ odds|json }}"
-                           value="right" data-odds="{{ odds|json }}" required>
-                </td>
-                <td align="left">
-                    I prefer taking a lottery that pays out {{Constants.high_bonus}} with <b>{{ odds }}%</b> chance and {{ Constants.low_bonus }} otherwise.  </td>
-            </tr>
-        {% endfor %}
-    </table>
-
-
-    {{ form.errors }}
-    <input type="hidden" name="answer" id="switchpoint"
-           value={{ right_side_start }}>
+    <p>Now that you have read the consultant's report, how likely do you think that the investment we pick for you is <b>good</b>? </p>
+   <div class="input-group">
+            {{ form.answer }}<span class="input-group-addon">%</span>
+    </div>
 
     {% next_button %}
     </div>
@@ -95,55 +65,24 @@ Task
 {% endblock %}
 
 
-{% block scripts %}
-<script>
-$(document).ready(function () {
-    $('input[type=radio]').change(
-            function () {
-                var clickedRadio = this;
-                var afterClickedRadio = false;
-                var clickedNumber = 100;
+{% block styles %}
+ <style type="text/css">
+ div.box1 {
+    padding: 10px;
+    border: 3px solid red;
+    margin: 0;
+}
+ div.box2 {
+    padding: 10px;
+    border: 1px solid #eee;
+    margin: 0;
+}
 
-                var radios = document.querySelectorAll('input[type=radio]');
+ </style>
 
-                for (i = 0; i < radios.length; ++i) {
-                    var radio = radios[i];
-                    if (radio == clickedRadio) {
-                        afterClickedRadio = true;
-                        continue;
-                    }
-                    if (!afterClickedRadio  && radio.value == 'right') {
-                        radio.checked = true;
-                    }
-                    if (afterClickedRadio && radio.value == 'left' ) {
-                        radio.checked = true;
-                    }
-                }
-                for (i = 0; i < radios.length; ++i) {
-                    var radio = radios[i];
-                    if (radio == clickedRadio) {
-                        radio.checked = true;
-                    }
-                }
-            }
-    );
-});
-
-    $('button').click(function() {
-        var radios = document.querySelectorAll('input[type=radio]');
-
-
-        for (i = 0; i < radios.length; ++i) {
-            var radio = radios[i];
-            if (radio.value == 'right' && radio.checked) {
-                $('#switchpoint').val(radio.dataset.odds - 5); {# 5 is the step size of the right hand size odds #}
-{#                break;#}
-            }
-{#            else {#}
-{#                $('#switchpoint').val(0);#}
-{#            }#}
-        }
-    });
-
-</script>
+    <style media="screen">
+      .input-group {
+        max-width: 100px;
+      }
+    </style>
 {% endblock %}
