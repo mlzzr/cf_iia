@@ -9,7 +9,7 @@
     {% endif %}
     The list below enumerates how a consultant will report under each scenario.</p>
 
-    <p>If the investment is indeed <b>good</b> (which happens {{prior_g}} out of 100 times), then</p>
+<p>If the investment is indeed <b>good</b> (which happens <b>{{prior_g}}</b> out of 100 times), then</p>
     <ul>
       {% if high_acc != low_acc %}
       <li>{{ player.senior_name }} will report {{Constants.good_message}} <b>{{high_acc}}%</b> of the times, but will mistakenly report {{Constants.bad_message}} <b>{{high_err}}%</b> of the times;
@@ -19,7 +19,7 @@
       </li>
     </ul>
 
-    <p>If the investment is indeed <b>bad</b> (which happens {{prior_b}} out of 100 times), then</p>
+<p>If the investment is indeed <b>bad</b> (which happens <b>{{prior_b}}</b> out of 100 times), then</p>
     <ul>
       {% if high_acc != low_acc %}
       <li>{{ player.senior_name }} will report {{Constants.bad_message}} <b>{{high_acc}}%</b> of the times, but will mistakenly report {{Constants.good_message}} <b>{{high_err}}%</b> of the times;
