@@ -92,9 +92,9 @@ class Subsession(BaseSubsession):
                     else:
                         p.posterior = (p.good_prior * (1 - p.low_acc)) / (p.good_prior * (1 - p.low_acc) + (1 - p.good_prior) * p.low_acc)
                 if p.posterior > p.good_prior:
-                    p.lottery_odds = int(p.posterior * 20) * 5
+                    p.lottery_odds = int(p.posterior * 100 + 2)
                 else:
-                    p.lottery_odds = (int(p.posterior * 20) + 1) * 5
+                    p.lottery_odds = int(p.posterior * 100 - 1)
                 p.lottery_win = np.random.binomial(1, p.lottery_odds / 100)
                 p.expectation = Constants.treatment_dict['expectation'][p.treatment]
 
