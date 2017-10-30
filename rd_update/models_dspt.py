@@ -13,7 +13,7 @@ import itertools
 author = 'Yucheng Liang'
 
 doc = """
-This experiment investigates various independence conditions in belief updating.
+This experiment investigates the effect of disappointment on belief updating.
 """
 
 class Constants(BaseConstants):
@@ -24,21 +24,20 @@ class Constants(BaseConstants):
 
     # Treatments
     treatment_dict = {
-        'senior_prob': [50, 1, 99, 1, 99],
-        'good_prior': [40, 40, 40, 40, 40],
-        'high_acc': [75, 90, 75, 90, 75],
-        'low_acc': [75, 75, 60, 75, 60],
-        'expectation': [0, 0, 0, -1, 1],  ## frame subjects' expectation of 75% happening
+        'senior_prob': [1, 99],
+        'high_dice': [5, 3],
+        'low_dice': [3, 1],
     }
     num_treatments = len(treatment_dict['senior_prob'])
     num_rounds = 1
-    session_treatments = [0, 0, 0, 1, 1]
-    sample_sizes = [100, 100, 100, 100, 100]
+    session_treatments = [1, 1]
+    sample_sizes = [50, 50]
     treatment_prob = [a*b for a, b in zip(session_treatments, sample_sizes)] / np.dot(session_treatments, sample_sizes)
-
+    acc = 75
+    good_prior = 40
 
     # Payoff
-    base_pay = c(0.5)
+    base_pay = c(0.8)
     complete_bonus = c(0)
     high_bonus = c(1)
     low_bonus = c(0)
@@ -47,7 +46,7 @@ class Constants(BaseConstants):
 
     # Only for templates
     IRB = "IRB-42199"
-    minutes = 8
+    minutes = 10
     good_message = '"The investment is Good."'
     bad_message = '"The investment is Bad."'
     name_list = ['Bob', 'Mike']
@@ -66,40 +65,31 @@ class Subsession(BaseSubsession):
                 p.treatment = np.random.choice(Constants.num_treatments, p=Constants.treatment_prob)
                 p.participant.vars['failure'] = 0
                 p.senior_name, p.junior_name = np.random.permutation(Constants.name_list)
-                p.high_acc = Constants.treatment_dict['high_acc'][p.treatment] / 100
-                p.low_acc = Constants.treatment_dict['low_acc'][p.treatment] / 100
                 p.senior_prob = Constants.treatment_dict['senior_prob'][p.treatment] / 100
-                p.good_prior = Constants.treatment_dict['good_prior'][p.treatment] / 100
+                p.senior_dice_num = Constants.treatment_dict['high_dice'][p.treatment]
+                p.junior_dice_num = Constants.treatment_dict['low_dice'][p.treatment]
                 p.senior = np.random.binomial(1, p.senior_prob)
-                p.acc = p.senior * p.high_acc + (1 - p.senior) * p.low_acc
+                p.dice_num = p.senior * p.senior_dice_num + (1 - p.senior) * p.junior_dice_num
+                p.dice_roll = r.randint(1, 6)
+                p.dice_win = (p.dice_roll <= p.dice_num)
+                p.good_prior = Constants.good_prior / 100
+                p.acc = Constants.acc / 100
                 p.good = np.random.binomial(1, p.good_prior)
-                if p.senior:
-                    if p.good: 
-                        p.signal = np.random.binomial(1, p.high_acc)
-                    else:
-                        p.signal = np.random.binomial(1, 1 - p.high_acc)
-                    if p.signal:
-                        p.posterior = (p.good_prior * p.high_acc) / (p.good_prior * p.high_acc + (1 - p.good_prior) * (1 - p.high_acc))
-                    else:
-                        p.posterior = (p.good_prior * (1 - p.high_acc)) / (p.good_prior * (1 - p.high_acc) + (1 - p.good_prior) * p.high_acc)
+
+                if p.good:
+                    p.signal = np.random.binomial(1, p.acc)
                 else:
-                    if p.good:
-                        p.signal = np.random.binomial(1, p.low_acc)
-                    else:
-                        p.signal = np.random.binomial(1, 1 - p.low_acc)
-                    if p.signal:
-                        p.posterior = (p.good_prior * p.low_acc) / (p.good_prior * p.low_acc + (1 - p.good_prior) * (1 - p.low_acc))
-                    else:
-                        p.posterior = (p.good_prior * (1 - p.low_acc)) / (p.good_prior * (1 - p.low_acc) + (1 - p.good_prior) * p.low_acc)
+                    p.signal = np.random.binomial(1, 1 - p.acc)
+                if p.signal:
+                    p.posterior = (p.good_prior * p.acc) / (p.good_prior * p.acc + (1 - p.good_prior) * (1 - p.acc))
+                else:
+                    p.posterior = (p.good_prior * (1 - p.acc)) / (p.good_prior * (1 - p.acc) + (1 - p.good_prior) * p.acc)
                 if p.posterior > p.good_prior:
                     p.lottery_odds = int(p.posterior * 100 - 1)
                 else:
                     p.lottery_odds = int(p.posterior * 100 + 2)
                 p.lottery_win = np.random.binomial(1, p.lottery_odds / 100)
-                p.expectation = Constants.treatment_dict['expectation'][p.treatment]
-
-
-
+                p.dice_count = np.random.binomial(1, .5)
 
 class Group(BaseGroup):
     pass
@@ -110,11 +100,14 @@ class Player(BasePlayer):
     senior_name = models.CharField()
     junior_name = models.CharField()
     senior_prob = models.FloatField()
-    high_acc = models.FloatField()
-    low_acc = models.FloatField()
+    senior_dice_num = models.PositiveIntegerField()
+    junior_dice_num = models.PositiveIntegerField()
+    dice_num = models.PositiveIntegerField()
+    dice_roll = models.PositiveIntegerField()
+    dice_win = models.BooleanField()
+    acc = models.FloatField()
     good_prior = models.FloatField()
     senior = models.BooleanField()
-    acc = models.FloatField()
     good = models.BooleanField()
     signal = models.BooleanField()
     posterior = models.FloatField()
@@ -127,7 +120,7 @@ class Player(BasePlayer):
         ],
         widget=widgets.RadioSelect()
     )
-    expectation = models.IntegerField()
+    dice_count = models.BooleanField()
 
 
     ## Understanding Questions
@@ -136,7 +129,6 @@ class Player(BasePlayer):
     truefalse2 = models.BooleanField(choices=[[1, 'True'], [0, 'False']], widget=widgets.RadioSelect())
     truefalse3 = models.BooleanField(choices=[[1, 'True'], [0, 'False']], widget=widgets.RadioSelect())
     truefalse4 = models.BooleanField(choices=[[1, 'True'], [0, 'False']], widget=widgets.RadioSelect())
-    multiple1 = models.IntegerField(widget=widgets.RadioSelect())
     blank1 = models.PositiveIntegerField()
     blank2 = models.PositiveIntegerField()
     blank3 = models.PositiveIntegerField()
@@ -153,9 +145,11 @@ class Player(BasePlayer):
 
 
     def calculate_bonus(self):
-        if self.investment:
-            if self.good:
-                self.participant.payoff = Constants.high_bonus
+        if self.dice_count:
+            self.participant.payoff = self.dice_win * Constants.high_bonus + (1 - self.dice_win) * Constants.low_bonus
         else:
-            if self.lottery_win:
-                self.participant.payoff = Constants.high_bonus
+            if self.investment:
+                self.participant.payoff = self.good * Constants.high_bonus + (1 - self.good) * Constants.low_bonus
+            else:
+                self.participant.payoff = self.lottery_win * Constants.high_bonus + (1 - self.lottery_win) * Constants.low_bonus
+

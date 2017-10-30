@@ -1,0 +1,6 @@
+    <p>In Part 1, you don't need to make any decision. How much you win is determined by a roll of the dice. </p>
+    <ul>
+        <li>If your consultant is <b>{{ player.senior_name }}</b>, you will win  <b>{{ Constants.high_bonus }}</b> if the dice rolls <b>{% if senior_highbound > 1 %}1-{% endif %}{{ senior_highbound }}</b> and <b>{{ Constants.low_bonus }}</b> if the dice rolls <b>{% if senior_lowbound < 6 %} {{ senior_lowbound }}-{% endif %}6</b>. </li>
+        <li>If your consultant is <b>{{ player.junior_name }}</b>, you will win  <b>{{ Constants.high_bonus }}</b> if the dice rolls <b>{% if junior_highbound > 1 %}1-{% endif %}{{ junior_highbound }}</b> and <b>{{ Constants.low_bonus }}</b> if the dice rolls <b>{% if junior_lowbound < 6 %} {{ junior_lowbound }}-{% endif %}6</b>. </li>
+    </ul>
+<p>In other words,  your chance of winning <b>{{ Constants.high_bonus }}</b> is <b>{{ player.senior_dice_num }}/6</b> if your consultant is <b>{{ player.senior_name }}</b> and <b>{{ player.junior_dice_num }}/6</b> if your consultant is <b>{{ player.junior_name }}</b>.</p>

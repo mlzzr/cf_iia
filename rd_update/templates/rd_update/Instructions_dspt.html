@@ -16,14 +16,29 @@ Instructions -- Please Read Carefully
 
 	<h3>Overview:</h3>
 
+    <p>
+        This HIT consists of two parts. In each part, you will either win <b>{{Constants.high_bonus}}</b> or <b>{{Constants.low_bonus}}</b>. In the end, <b>one part will be randomly chosen to determine your bonus.</b> Each part is equally likely to be chosen. The study ends with a very short survey that you also need to complete to be paid any bonus.
+    </p>
+
+    <p><b>At the very beginning, the computer will randomly assign a consultant to you. The consultant is either {{ player.senior_name }} or {{ player.junior_name }}.</b></p>
+
+    <h3>Part 1</h3>
+
+{% include "rd_update/ShortIns_dice.html"%}
+
+<h3>Part 2</h3>
+
 <p>
-	<b>This task asks you to choose between an "investment" and a lottery.</b> You will receive the bonus of <b>{{Constants.high_bonus}}</b> if your choice pays out and <b>no bonus</b> if it doesn't. The study ends with a very short survey that you also need to complete to be paid any bonus.
+	<b>In Part 2, you will choose between an "investment" and a lottery.</b> You will win <b>{{Constants.high_bonus}}</b> if your choice pays out and <b>{{Constants.low_bonus}}</b> if it doesn't.
 </p>
 
 
-{% include "rd_update/ShortIns.html"%}
+{% include "rd_update/ShortIns_dspt.html"%}
 
-<p>After the consultant makes his report, you will have to make a decision. <b>You can either take the investment opportunity, or you can take a lottery that gives you the bonus of {{Constants.high_bonus}} with a certain chance and no bonus otherwise.</b> After you make your decision, we will reveal the quality of the investment as well as the result of the lottery and you will be paid accordingly.</p>
+<p>After your consultant makes his report, you will have to make a decision. <b>You can either take the investment opportunity, or you can take a lottery that lets you win {{Constants.high_bonus}} with a certain chance and {{ Constants.low_bonus }} otherwise.</b></p>
+
+    <h3>Survey and Results</h3>
+    <p>In the end, you will need to answer a very short survey. After the survey, we will reveal the roll of the dice in Part 1, the quality of the investment and the outcome of the lottery in Part 2, and the part which is chosen to count for payment.</p>
 
 <p>Before you proceed, we need to ask you some comprehension questions to make sure that you understand the task. Click the button below to go to the comprehension questions.</p>
 
@@ -41,33 +56,27 @@ Instructions -- Please Read Carefully
 
     <div id="understanding" style="visibility:hidden">
 	<h3>Comprehension questions:</h3>
-        <p>Both the investment opportunity and the lottery are free.</p>
+        <p>Part 1 and Part 2 are equally likely to be chosen to count for payment.</p>
         {% formfield player.truefalse1 with label="" %}
 
-        <p>Each one of the 100 investment opportunities is equally likely to be offered to me.</p>
+        <p>In Part 1, I am more likely to win if my consultant is {{ player.senior_name }}.</p>
         {% formfield player.truefalse2 with label="" %}
 
-        {% if high_acc != low_acc %}
-        <p>Either {{ player.senior_name }} or {{ player.junior_name }} will report to me, but not both.</p>
+        <p>In Part 2, both the investment opportunity and the lottery are free.</p>
         {% formfield player.truefalse3 with label="" %}
-        {% endif %}
 
-        {% if expectation != 0 and high_acc != low_acc %}
-        <p>Which consultant am I more likely to get?</p>
-        {% formfield player.multiple1 with label="" %}
-        {% endif %}
+        <p>In Part 2, each one of the 100 investment opportunities is equally likely to be offered to me.</p>
+        {% formfield player.truefalse4 with label="" %}
 
-		<p>Among the 100 investment opportunities, how many of them are <b>good</b>?</p>
+		<p>Among the 100 investment opportunities in Part 2, how many of them are <b>good</b>?</p>
 		{% formfield player.blank1 with label='' %}
 
-        {% if high_acc != low_acc %}
-        <p>If the investment opportunity is indeed <b>good</b>, how likely will {{ player.senior_name }} say "The investment is <b>Good</b>"?</p>
+        <p>In Part 2, if the investment opportunity is indeed <b>good</b>, how likely will the consultant say "The investment is <b>Good</b>"?</p>
 		<div class="input-group">
             {{ form.blank2}}<span class="input-group-addon">%</span>
         </div>
-        {% endif %}
 
-		<p>If the investment opportunity is indeed <b>bad</b>, how likely will {{ player.junior_name }} say "The investment is <b>Good</b>"?</p>
+		<p>In Part 2, if the investment opportunity is indeed <b>bad</b>, how likely will the consultant say "The investment is <b>Good</b>"?</p>
 		<div class="input-group">
             {{ form.blank3}}<span class="input-group-addon">%</span>
         </div>

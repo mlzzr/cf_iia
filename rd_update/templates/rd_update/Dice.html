@@ -1,0 +1,58 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+
+
+{% block title %}
+Part 1
+{% endblock %}
+
+{% block content %}
+<div class="panel-group" id="accordion">
+    <div class="panel panel-warning" id="panel1">
+        <div class="panel-heading">
+             <h4 class="panel-title">
+        <a data-toggle="collapse" data-target="#collapseOne" class="btn-block" href="#collapseOne">
+            Task description -- Click to collapse
+        </a>
+      </h4>
+
+        </div>
+        <div id="collapseOne" class="panel-collapse collapse in" data-toggle="false">
+            <div class="panel-body">
+
+{% include "rd_update/ShortIns_dice.html"%}
+            </div>
+        </div>
+    </div>
+</div>
+
+
+    <div  id="hide">
+        <button type="button" class="btn btn-primary btn-large" onclick="
+        document.getElementById('report').style.display='block';
+        document.getElementById('hide').style.display = 'none'"
+        >
+            Request a consultant
+        </button>
+
+    </div>
+
+<br>
+
+    <div id="report" style="display:none">
+        <p style="font-size:20px">
+            The consultant that the computer assigns to you is {% if senior %}<b>{{ player.senior_name }}</b> {% else %} <b>{{ player.junior_name }}</b> {% endif %}.
+        </p>
+        <p style="font-size:20px">
+            Hence, in Part 1, you will win <b>{{ Constants.high_bonus }}</b> if the dice rolls
+            {% if senior %}
+                 <b>{% if senior_highbound > 1 %}1-{% endif %}{{ senior_highbound }} and <b>{{ Constants.low_bonus }}</b> if the dice rolls <b>{% if senior_lowbound < 6 %} {{ senior_lowbound }}-{% endif %}6</b></b>.
+            {% else %}
+                 <b>{% if junior_highbound > 1 %}1-{% endif %}{{ junior_highbound }} and <b>{{ Constants.low_bonus }}</b> if the dice rolls <b>{% if junior_lowbound < 6 %} {{ junior_lowbound }}-{% endif %}6</b></b>.
+            {% endif %}
+        </p>
+
+    {% next_button %}
+    </div>
+
+{% endblock %}

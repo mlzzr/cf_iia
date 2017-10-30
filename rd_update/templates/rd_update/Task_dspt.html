@@ -1,0 +1,57 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+
+
+{% block title %}
+Part 2
+{% endblock %}
+
+{% block content %}
+<div class="panel-group" id="accordion">
+    <div class="panel panel-warning" id="panel1">
+        <div class="panel-heading">
+             <h4 class="panel-title">
+        <a data-toggle="collapse" data-target="#collapseOne" class="btn-block" href="#collapseOne">
+            Task description -- Click to collapse
+        </a>
+      </h4>
+
+        </div>
+        <div id="collapseOne" class="panel-collapse collapse in" data-toggle="false">
+            <div class="panel-body">
+
+{% include "rd_update/ShortIns_dspt.html"%}
+            </div>
+        </div>
+    </div>
+</div>
+
+<p style="font-size:20px"> The computer has randomly chosen an investment opportunity for you. Recall that there are 40 good investments out of 100.</p>
+    <div  id="hide">
+        <button type="button" class="btn btn-primary btn-large" onclick="
+        document.getElementById('report').style.display='block';
+        document.getElementById('hide').style.display = 'none'"
+        >
+            Read {% if senior %} {{ player.senior_name }}'s {% else %} {{ player.junior_name }}'s {% endif %} report on the investment
+        </button>
+
+    </div>
+
+<br>
+
+    <div id="report" style="display:none">
+        <p style="font-size:20px">
+            {% if senior %}<b>{{ player.senior_name }}</b>'s report:
+            {% else %}<b>{{ player.junior_name }}</b>'s report:
+            {% endif %}
+            "The investment is
+            {% if signal %}<b>Good</b>
+            {% else %}<b>Bad</b>{% endif %}".
+        </p>
+        <p><b>Do you want to take the investment opportunity or a lottery that pays you {{Constants.high_bonus}} with {{lottery_odds}}% chance?</b></p>
+        {% formfield player.investment with label=""%}
+
+    {% next_button %}
+    </div>
+
+{% endblock %}

@@ -30,8 +30,8 @@
     </ul>
 <p>
 {% if expectation != 0 and high_acc != low_acc %}
-{% if senior_prob > 50 %} <b>The consultant that will be at your service is most likely to be {{ player.senior_name }}, but with a small chance it will be {{ player.junior_name }} instead.</b>
-{% elif senior_prob < 50 %} <b>The consultant that will be at your service is most likely to be {{ player.junior_name }}, but with a small chance it will be {{ player.senior_name }} instead.</b>
+{% if senior_prob > 50 %} <b>The consultant that will be at your service is almost certainly going to be {{ player.senior_name }}, but with a small chance it will be {{ player.junior_name }} instead.</b>
+{% elif senior_prob < 50 %} <b>The consultant that will be at your service is almost certainly going to be {{ player.junior_name }}, but with a small chance it will be {{ player.senior_name }} instead.</b>
 {% endif %}
 {% endif %}
 </p>
